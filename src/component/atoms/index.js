@@ -1,0 +1,1 @@
+// call tout les atoms (1 dossier pas atoms ex: text.js)
