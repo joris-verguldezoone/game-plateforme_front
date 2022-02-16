@@ -3,8 +3,10 @@ import { Text, View, Button, TextInput, ScrollView, TouchableOpacity } from 'rea
 import styles from './styles.js';
 
 const HomeScreen = ({ navigation }) => {
+    // localStorage.clear();
     return (
         <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+            <Button title='test'>Test</Button>
             <Text style={styles}>Bienvenue sur CBGames!</Text>
             <Text style={styles}>Veuillez vous connecter/vous enregistrer</Text>
             <Button
