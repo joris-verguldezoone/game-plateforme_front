@@ -18,7 +18,7 @@ const HomeScreen = ({ navigation }) => {
                     navigation.navigate('Connexion'), { name: "monChibre" }
                 }
                 }
-
+                //aaaaaaaaaaaaaaaaaaaa
                 // onPress={() => navigation.navigate('Connexion')}
                 // title="Connexion"
                 accessibilityLabel="Appuyez sur ce bouton pour être redirigé vers la page de connexion"
