@@ -1,53 +1,29 @@
 import React, { useState, useEffect } from "react";
 import { StyleSheet, Text, View, Button, TextInput, ScrollView, TouchableOpacity } from 'react-native';
 import styles from './styles.js';
-import AuthService from "../services/AuthService";
+import AuthService from "../services/jeej";
 // import { useForm } from "react-hook-form";
+import * as SecureStore from 'expo-secure-store';
+import { login } from "../services/AuthService.js";
 
-const axios = require('axios');
-const apiUrl = "http://localhost:3000/";
+
 
 
 const LoginScreen = ({ navigation }) => {
-  const [username, setUsername] = useState({});
-  const [password, setPassword] = useState({});
+  const [usernameInput, setUsernameInput] = useState({});
+  const [passwordInput, setPasswordInput] = useState({});
   const [logChange, setLogChange] = useState(0)
-  console.log(username)
-  console.log(password)
+  console.log(usernameInput)
+  console.log(passwordInput)
 
-  let ok = localStorage.getItem("username");
-  console.log(ok)
-  // useEffect(() => {
-  //   console.log('mabite')
-  //   const user = AuthService.getCurrentUser();
-  //   console.log(user)
-  //   // const payload = this.useToken(response2);
-  //   let realaccessToken = AuthService.getToken()
-  //   console.log(realaccessToken)
-  //   if (accessToken) {
-  //     // test = AuthService.useToken(realaccessToken)
-  //     // console.log(test)
+  const handleSubmit = () => {
+    login(usernameInput, passwordInput)
+  }
 
-  //     // accessToken,
-  //     // (decoded) => {
-  //     setAccessToken(realaccessToken);
-  //     // setCurrentUser({
-  //     //   id: decoded.sub,
-  //     //   username: decoded.username,
-  //     //   email: decoded.email,
-  //     //   firstname: decoded.firstname,
-  //     //   lastname: decoded.lastname,
-  //     //   role: decoded.role,
-  //     // });
+  // AuthService.getValueFor("username", (data) => {
+  //   console.log(data)
 
-  //     // }
-  //   }
-  //   // faire une fonction handleSubmit 
-  //   // si les props de login changent alors j'appel login puis useToken en async vu que c'est du useEffect 
-  // }, [logChange]);
-
-
-
+  // });
 
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
@@ -57,7 +33,7 @@ const LoginScreen = ({ navigation }) => {
         // autoComplete="name"
         name="username"
         // value={user.username}
-        onChange={e => setUsername(e.target.value)}
+        onChangeText={e => setUsernameInput(e)}
 
       />
       <TextInput
@@ -66,7 +42,7 @@ const LoginScreen = ({ navigation }) => {
         // autoComplete="password"
         name="password"
         // value={user.password}
-        onChange={e => setPassword(e.target.value)}
+        onChangeText={e => setPasswordInput(e)}
       />
       <Button
         style={styles.buttonRegisterLogin}
@@ -79,11 +55,11 @@ const LoginScreen = ({ navigation }) => {
         //   });
         //   console.log('Pseudo: ' + JSON.stringify(pseudo) + ' / ' + 'Password: ' + JSON.stringify(password));
         // }}
-        onPress={() => AuthService.login(username, password)}
-        // sur le onpress je change les props 
-        ref={(c) => {
-          setLogChange(1);
-        }}
+        onPress={handleSubmit}
+      // sur le onpress je change les props 
+      //ref={(c) => {
+      //setLogChange(1);
+      //}}
       />
     </View>
   );
