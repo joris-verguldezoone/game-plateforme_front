@@ -8,8 +8,22 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import HomeScreen from './src/scenes/HomeScreen';
 import RegisterScreen from './src/scenes/RegisterScreen';
 import LoginScreen from './src/scenes/LoginScreen';
+<<<<<<< HEAD
 import { login } from './src/scenes/LoginScreen';
 import AuthService from './src/services/AuthService'
+=======
+import { getValueFor, useToken } from './src/services/AuthService';
+
+// import AsyncStorage from '@react-native-async-storage/async-storage';
+
+// import { AsyncStorage } from 'react-native';
+
+// import { MainScreen } from './src/scenes/MainScreen';
+// import { ProfilScreen } from './src/scenes/ProfilScreen';
+
+// const axios = require('axios');
+// const apiUrl = "http://api-board-games.joris-verguldezoone.students-laplateforme.io";
+>>>>>>> 1374aa6d974caf6be6790f350bb74fa2fb346f0c
 
 const Stack = createNativeStackNavigator();
 
@@ -18,36 +32,49 @@ export default function App() {
   const [currentUser, setCurrentUser] = useState();
   const [login, setLogin] = useState();
   const [password, setPassword] = useState();
+  // faut set un state loading, quand il est validé par loginScreen alors App nous fait switch sur profil par exemple   
+
 
   useEffect(() => {
-    const user = AuthService.getCurrentUser();
-    console.log(user)
-    // console.log('mabite')
-    // const payload = this.useToken(response2);
-    let realaccessToken = AuthService.getToken()
-    console.log(realaccessToken)
-    if (user) {
-      // test = AuthService.useToken(realaccessToken)
-      // console.log(test)
-      console.log('cool')
-      setAccessToken(realaccessToken);
-      console.log(accessToken)
+    let userToken = getValueFor('token')
+    userToken.then(function (token) {
+      console.log('Token awaited ' + token + ' :) ') // "Some User token"
 
-      let toast = AuthService.useToken(realaccessToken)
-      console.log(toast)
-      // accessToken,
-      // (decoded) => {
-      // setCurrentUser({
-      //   id: decoded.sub,
-      //   username: decoded.username,
-      //   email: decoded.email,
-      //   firstname: decoded.firstname,
-      //   lastname: decoded.lastname,
-      //   role: decoded.role,
-      // });
+      console.log('befour' + userToken + 'before')
+      console.log('we are in use Effect')
+      if (typeof token !== 'undefined' && token !== 'Object { }') {
+        console.log(token + 'ki march')
+        console.log('App useEffect entry')
 
-      // }
-    }
+        useToken(token).then(function (payload) {
+          console.log(payload); // "initResolve"
+          console.log('useToken svp')
+
+          if (typeof payload !== 'undefined') {
+
+            setCurrentUser({
+              id: payload.userId,
+              username: payload.username,
+              role: payload.role,
+              idavatar: payload.idavatar,
+              expiresIn: payload.expiresIn
+            });
+            console.log(currentUser + 'currentUser')
+          }
+        })
+      }
+    })
+
+
+    //lifecycle sur currentUsr, si il est define alors fetch la liste d'amis avec un module qui s'ajoute 
+    // pareil pour la recherchede lobby l'accès son profil etc 
+
+
+    // accessToken, // async de la résponse pour stocker dans le setUser
+    // (decoded) => { // callback 
+
+    // }
+
     // faire une fonction handleSubmit 
     // si les props de login changent alors j'appel login puis useToken en async vu que c'est du useEffect 
   }, []);
