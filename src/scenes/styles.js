@@ -24,13 +24,13 @@ const styles = StyleSheet.create({
 
     homeContainer2: {
         flex:3,
-        backgroundColor:"#9EBE3A",
+        backgroundColor:"#0458af",
         justifyContent:"flex-start",
         alignItems:"center",
         alignSelf:"stretch",
         borderTopLeftRadius:20,
         borderTopRightRadius:20,
-        shadowColor:"#778F2B",
+        shadowColor:"#0458af",
         shadowOpacity:100,
         shadowRadius:30,
         shadowOffset:{
@@ -42,56 +42,80 @@ const styles = StyleSheet.create({
     Title: {
         fontSize: 32,
         fontWeight:"bold",
-        textShadowColor:"black",
-        textShadowRadius:20,
-        textShadowOffset: {
-            height:0,
-            width:0,
-        },
     },
 
     MediumTitle: {
         fontSize:28,
-        fontWeight:"500",
+        fontWeight:"800",
+        color:"white",
     },
 
     LoginRegisterLabel: {
         fontSize: 18,
         fontWeight: "600",
+        color:"white",
     },
 
     loginRegisterInput: {
-        borderColor:"#778F2B",
+        borderRadius:8,
+        borderColor:"black",
         borderWidth:1,
-        backgroundColor:"#778F2B",
-        color:"white",
+        backgroundColor:"white",
+        color:"black",
         fontSize:18,
         padding:10,
-        shadowColor:"#778F2B",
-        shadowOpacity:100,
-        shadowRadius:20,
+        shadowColor:"black",
+        shadowOpacity:0.5,
+        shadowRadius:10,
         shadowOffset:{
-            height:0,
+            height:5,
             width:0,
         }
     },
 
     notRegisteredText: {
-        fontSize:20,
-        fontWeight:"400",
-        paddingLeft:20,
-        paddingRight:20,
+        fontSize:18,
+        fontWeight:"600",
+        color:"black",
+        padding:5,
     },
 
     inputContainer: {
-        margin:10,
+        margin:8,
         width:width-80,
     }, 
 
     loginRegisterButton: {
-        marginTop:20,
-        fontSize:24,
-        width:60,
+        backgroundColor:"white",
+        alignItems:"center",
+        alignSelf:"center",
+        padding:6,
+        width:200,
+        margin:7,
+        borderRadius:8,
+        borderColor:"black",
+        borderWidth:1,
+        shadowColor:"black",
+        shadowOpacity:0.5,
+        shadowRadius:10,
+        shadowOffset:{
+            height:5,
+            width:0,
+        }
+    },
+
+    loginRegisterButtonText: {
+        fontSize:20,
+        fontWeight:"500",
+        color:"black",
+        padding:3,
+    },
+
+    regle: {
+        borderTopWidth:1,
+        borderColor:"white", 
+        width:width-80, 
+        padding:3,
     },
 });
 

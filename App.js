@@ -80,10 +80,10 @@ export default function App() {
     <NavigationContainer>
       <Stack.Navigator screenOptions={{
         headerStyle: {
-          backgroundColor: '#9EBE3A',
+          backgroundColor: '#0458af',
           borderBottomWidth: 0,
           padding: 0,
-          shadowColor:"#778F2B",
+          shadowColor:"#0458af",
           shadowOpacity:100,
           shadowRadius:20,
           shadowOffset:{
@@ -91,7 +91,7 @@ export default function App() {
               width:0,
           }
         },
-        headerTintColor: '#778F2B',
+        headerTintColor: 'white',
         headerTitleStyle: {
           fontWeight: 'bold',
         },

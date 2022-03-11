@@ -41,24 +41,27 @@ const HomeScreen = ({ navigation }) => {
                             style={styles.loginRegisterInput}
                             onChangeText={setPassword}
                             value={password}
-                            placeholder="Mon Petit Code Secret..."
+                            placeholder="Mon code secret..."
                         />
                     </View>
                     
-                    <Button
-                        style={styles.loginRegisterButton}
-                        title="Connexion"
-                        color="#778F2B"
-                        accessibilityLabel="Connexion"
-                    />
-                </View>
-                <View style={{flex:1, justifyContent:"center", backgroundColor:"white", borderRadius:7}}>
                     <TouchableOpacity
-                        // onPress={}
+                        style={styles.loginRegisterButton}
+                        
                     >
-                        <Text style={styles.notRegisteredText}>Pas encore inscrit ?</Text>
+                        <Text style={styles.loginRegisterButtonText}>Connexion</Text>
                     </TouchableOpacity>
                 </View>
+                <View style={styles.regle}>
+                </View>
+                <TouchableOpacity
+                    style={styles.loginRegisterButton}
+                    onPress={() => {
+                        navigation.navigate('Register'), { name: "Register" }
+                    }}
+                >
+                    <Text style={styles.notRegisteredText}>Pas encore inscrit ?</Text>
+                </TouchableOpacity>
                 <View style={{flex:1, justifyContent:"flex-end", alignItems:"center"}}>
                     <Text style={{fontWeight:"300"}}>Réalisé par Joris V., Marwanne B., Mathis C., Shun L.</Text>
                     <Text style={{paddingBottom:10,fontWeight:"300"}}>LaPlateforme_</Text>
