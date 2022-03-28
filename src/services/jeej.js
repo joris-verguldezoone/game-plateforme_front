@@ -23,8 +23,7 @@ class AuthService {
 
         const axios = require('axios');
 
-        const apiUrl = "http://10.0.1.136:3000/auth/login";
-        // const apiUrl = "http://qa-6wy.anonymous.api-front.exp.direct:3306/auth/login";
+        const apiUrl = "http://localhost/auth/login";
         console.log(password);
         console.log(username);
         axios.post(apiUrl, {
