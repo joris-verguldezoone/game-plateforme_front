@@ -21,6 +21,69 @@ const styles = StyleSheet.create({
     //     paddingTop: 10,
     // },
 
+    LineLobby: {
+        flex:1,
+        flexDirection:'row',
+        alignContent: 'flex-start',
+        justifyContent: 'center',
+        backgroundColor:'white',
+        maxHeight:20,
+        width:300,
+        margin:10,
+    },
+
+    ViewLobby1: {
+        flex:2,
+        alignItems:'center',
+        justifyContent:'center',
+        backgroundColor:'darkgreen',
+    },
+
+    ViewLobby2: {
+        flex:1,
+        flexDirection:'column',
+        alignItems:'flex-start',
+        justifyContent:'flex-start',
+        backgroundColor:'lightblue'
+    },
+
+    ButtonEquipeLobby: {
+        flex:1
+    },
+
+    TextPlayerLobby: {
+        flex:3,
+    },
+
+    TextButtonLobby: {
+        flex:1,
+        backgroundColor:'orange',
+    },
+
+    ImageLobby: {
+        flex:1,
+
+    },
+
+    ImagePlayerLobby: {
+        flex:1,
+    },
+
+    ViewOptionsLobby: {
+
+    },
+
+    InputCheckboxLobby: {
+
+    },
+    
+    ButtonOptionLobby1: {
+
+    },
+
+    ButtonOptionLobby2: {
+
+    },
 
 });
 
