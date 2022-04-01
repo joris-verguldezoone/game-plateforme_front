@@ -8,12 +8,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import HomeScreen from './src/scenes/HomeScreen';
 import RegisterScreen from './src/scenes/RegisterScreen';
 import LoginScreen from './src/scenes/LoginScreen';
-<<<<<<< HEAD
-import { login } from './src/scenes/LoginScreen';
-import AuthService from './src/services/AuthService'
-=======
 import LobbyScreen from './src/scenes/lobby/index';
->>>>>>> d98fa2f1f8b5d3d9c9e15e4d73cf6c66b00862a7
 import { getValueFor, useToken } from './src/services/AuthService';
 
 // import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -36,7 +31,6 @@ export default function App() {
 
   return (
     <NavigationContainer>
-<<<<<<< HEAD
       <Stack.Navigator screenOptions={{
         headerStyle: {
           backgroundColor: '#0458af',
@@ -56,26 +50,9 @@ export default function App() {
         },
       }}>
         <Stack.Screen name="Home" component={HomeScreen} options={{ title: "Home" }}/>
+        <Stack.Screen name="Lobby" component={LobbyScreen} options={{ title: "Lobby" }}/>
         <Stack.Screen name="Register" component={RegisterScreen} options={{ title: 'Register' }} />
         <Stack.Screen name="Connexion" component={LoginScreen} login='' password='' options={{ title: 'Connexion' }} />
-=======
-      <Stack.Navigator>
-        {/* props contient déjà la navigation */}
-        <Stack.Screen name="HomeScreen" component={HomeScreen} options={{ title: "Accueil" }} />
-        {/* {(props) => <HomeScreen {...props} />} */}
-
-        <Stack.Screen name="RegisterScreen" component={RegisterScreen} options={{ title: 'Register' }} />
-        <Stack.Screen name="LoginScreen" component={LoginScreen} options={{ title: 'Connexion' }} />
-        {/* {(props) => <LoginScreen accessToken={accessToken} currentUser={currentUser} />} */}
-        {/* </Stack.Screen> */}
-
-        <Stack.Screen name="LobbyScreen" component={LobbyScreen} options={{ title: 'Lobby', orientation: 'landscape', animation: 'flip'}}/>
-
-        {/* On navigue ves le stackScreen et son name */}
-        <Stack.Screen name="ProfilScreen" component={ProfilScreen} options={{ title: 'Profil' }} />
-        {/* <Stack.Screen name="Menu" component={MainScreen} options={{ title: 'Menu' }} /> */}
-        {/* <Stack.Screen name="InfoJeu" component={GameInfoScreen} options={{ title: 'Info Jeu' }} /> */}
->>>>>>> d98fa2f1f8b5d3d9c9e15e4d73cf6c66b00862a7
       </Stack.Navigator>
     </NavigationContainer>
   );

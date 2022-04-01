@@ -1,9 +1,4 @@
 import * as React from 'react';
-<<<<<<< HEAD
-import { useState, useEffect } from 'react';
-import { Text, View, Button, TextInput, ScrollView, TouchableOpacity, CheckBox } from 'react-native';
-=======
->>>>>>> d98fa2f1f8b5d3d9c9e15e4d73cf6c66b00862a7
 import styles from './styles.js';
 
 import { StatusBar } from 'expo-status-bar';
@@ -12,72 +7,6 @@ import { StyleSheet, Text, View, Button, TextInput, ScrollView, TouchableOpacity
 import { getValueFor, useToken } from '../services/AuthService';
 
 const HomeScreen = ({ navigation }) => {
-<<<<<<< HEAD
-
-    const [AutoLogSelected, setAutoLogSelection] = useState(false);
-    const [pseudo,setPseudo] = useState("");
-    const [password,setPassword] = useState("");
-
-    // localStorage.clear();
-    return (
-        <View style={styles.pageContainer}>
-            <View style={styles.homeContainer}>
-                <Text style={styles.Title}>
-                    CBGames !
-                </Text>
-            </View>
-            <View style={styles.homeContainer2}>
-                <View style={{flex:1, justifyContent:"center"}}>
-                    <Text style={styles.MediumTitle}>Connexion</Text>
-                </View>
-                <View style={{flex:3, justifyContent:"center"}}>
-                    <View style={styles.inputContainer}>
-                        <Text style={styles.LoginRegisterLabel}>
-                            Email / Identifiant:
-                        </Text>
-                        <TextInput
-                            style={styles.loginRegisterInput}
-                            onChangeText={setPseudo}
-                            value={pseudo}
-                            placeholder="Mon joli pseudonyme..."
-                        />
-                    </View>
-                    <View style={styles.inputContainer}>
-                        <Text style={styles.LoginRegisterLabel}>
-                            Mot de passe:
-                        </Text>
-                        <TextInput
-                            style={styles.loginRegisterInput}
-                            onChangeText={setPassword}
-                            value={password}
-                            placeholder="Mon code secret..."
-                        />
-                    </View>
-                    
-                    <TouchableOpacity
-                        style={styles.loginRegisterButton}
-                        
-                    >
-                        <Text style={styles.loginRegisterButtonText}>Connexion</Text>
-                    </TouchableOpacity>
-                </View>
-                <View style={styles.regle}>
-                </View>
-                <TouchableOpacity
-                    style={styles.loginRegisterButton}
-                    onPress={() => {
-                        navigation.navigate('Register'), { name: "Register" }
-                    }}
-                >
-                    <Text style={styles.notRegisteredText}>Pas encore inscrit ?</Text>
-                </TouchableOpacity>
-                <View style={{flex:1, justifyContent:"flex-end", alignItems:"center"}}>
-                    <Text style={{fontWeight:"300"}}>Réalisé par Joris V., Marwanne B., Mathis C., Shun L.</Text>
-                    <Text style={{paddingBottom:10,fontWeight:"300"}}>LaPlateforme_</Text>
-                </View>
-            </View>
-            
-=======
     // localStorage.clear();
 
     const [accessToken, setAccessToken] = useState('Chibrosaure');
@@ -186,7 +115,6 @@ const HomeScreen = ({ navigation }) => {
                 title="Menu du lobby"
                 accessibilityLabel="Appuyez sur ce bouton pour être redirigé vers la page de inscription"
             />
->>>>>>> d98fa2f1f8b5d3d9c9e15e4d73cf6c66b00862a7
         </View>
     );
 }

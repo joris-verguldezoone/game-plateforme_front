@@ -4,7 +4,6 @@ var width = Dimensions.get('window').width; //full width
 var height = Dimensions.get('window').height; //full height
 
 const styles = StyleSheet.create({
-<<<<<<< HEAD
 
     pageContainer: {
         flex: 1,
@@ -71,28 +70,8 @@ const styles = StyleSheet.create({
         shadowOffset:{
             height:5,
             width:0,
-        }
-=======
-    // container: {
-    //     flex: 1,
-    //     backgroundColor: '#fff',
-    //     alignItems: 'center',
-    //     justifyContent: 'center',
-    // },
-
-    // inputRegisterLogin: {
-    //     backgroundColor: 'white',
-    //     borderStyle: 'solid',
-    //     borderWidth: 1,
-    //     padding: 10,
-    //     margin: 5,
-    //     borderColor: '#797979',
-    //     borderRadius: 5,
-    // },
-
-    // buttonRegisterLogin: {
-    //     paddingTop: 10,
-    // },
+        },
+    },
 
     LineLobby: {
         flex:1,
@@ -148,12 +127,10 @@ const styles = StyleSheet.create({
 
     InputCheckboxLobby: {
 
->>>>>>> d98fa2f1f8b5d3d9c9e15e4d73cf6c66b00862a7
     },
     
     ButtonOptionLobby1: {
 
-<<<<<<< HEAD
     notRegisteredText: {
         fontSize:18,
         fontWeight:"600",
@@ -165,13 +142,11 @@ const styles = StyleSheet.create({
         margin:8,
         width:width-80,
     }, 
-=======
     },
 
     ButtonOptionLobby2: {
 
     },
->>>>>>> d98fa2f1f8b5d3d9c9e15e4d73cf6c66b00862a7
 
     loginRegisterButton: {
         backgroundColor:"white",
