@@ -8,6 +8,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import HomeScreen from './src/scenes/HomeScreen';
 import RegisterScreen from './src/scenes/RegisterScreen';
 import LoginScreen from './src/scenes/LoginScreen';
+import LobbyScreen from './src/scenes/lobby/index';
 import { getValueFor, useToken } from './src/services/AuthService';
 
 // import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -40,14 +41,14 @@ export default function App() {
         {/* {(props) => <LoginScreen accessToken={accessToken} currentUser={currentUser} />} */}
         {/* </Stack.Screen> */}
 
-
+        <Stack.Screen name="LobbyScreen" component={LobbyScreen} options={{ title: 'Lobby', orientation: 'landscape', animation: 'flip'}}/>
 
         {/* On navigue ves le stackScreen et son name */}
         <Stack.Screen name="ProfilScreen" component={ProfilScreen} options={{ title: 'Profil' }} />
         {/* <Stack.Screen name="Menu" component={MainScreen} options={{ title: 'Menu' }} /> */}
         {/* <Stack.Screen name="InfoJeu" component={GameInfoScreen} options={{ title: 'Info Jeu' }} /> */}
       </Stack.Navigator>
-    </NavigationContainer >
+    </NavigationContainer>
   );
 }
 

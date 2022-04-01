@@ -173,6 +173,12 @@ const HomeScreen = ({ navigation }) => {
                 title="Profil"
                 accessibilityLabel="Appuyez sur ce bouton pour être redirigé vers la page Profil"
             />
+            <Button
+                style={styles.buttonRegisterLogin}
+                onPress={() => navigation.navigate('LobbyScreen')}
+                title="Menu du lobby"
+                accessibilityLabel="Appuyez sur ce bouton pour être redirigé vers la page de inscription"
+            />
         </View>
     );
 }

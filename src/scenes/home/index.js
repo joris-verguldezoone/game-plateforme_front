@@ -21,7 +21,13 @@ function HomeScreen({ navigation }) {
                 title="Menu des jeux"
                 accessibilityLabel="Appuyez sur ce bouton pour être redirigé vers la page de inscription"
             />
+            <Button
+                style={styles.buttonRegisterLogin}
+                onPress={() => navigation.navigate('LobbyScreen')}
+                title="Menu du lobby"
+                accessibilityLabel="Appuyez sur ce bouton pour être redirigé vers la page de inscription"
+            />
         </View>
     );
 }
-export default function HomeScreen() { }
+export default HomeScreen();
