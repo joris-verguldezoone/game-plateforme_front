@@ -44,7 +44,7 @@ const Register = (username, password, confPassword) => {
     // set state ici qui sera récupéré apres la requete axios 
     if (password == confPassword) {
         console.log(password);
-        axios.post('http://localhost:3306/' + "users", {
+        axios.post('http://localhost/' + "users", {
             username: username,
             password: password,
             role: 1,

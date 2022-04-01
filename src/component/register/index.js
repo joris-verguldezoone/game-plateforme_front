@@ -4,7 +4,7 @@ import { StyleSheet, Text, View, SafeAreaView, FlatList, ActivityIndicator } fro
 
 
 const axios = require('axios');
-const apiUrl = "http://10.0.4.122:3000/";
+const apiUrl = "http://localhost/";
 
 const Register = (username, password, confPassword) => {
 

@@ -5,19 +5,57 @@ import AuthService from "../services/jeej";
 // import { useForm } from "react-hook-form";
 import * as SecureStore from 'expo-secure-store';
 import { login } from "../services/AuthService.js";
+import { NavigationHelpersContext } from "@react-navigation/native";
 
 
 
 
-const LoginScreen = ({ navigation }) => {
+const LoginScreen = ({ navigation, route, props }) => {
   const [usernameInput, setUsernameInput] = useState({});
   const [passwordInput, setPasswordInput] = useState({});
   const [logChange, setLogChange] = useState(0)
   console.log(usernameInput)
   console.log(passwordInput)
 
+  console.log("screenName")
+  // console.log()
+  console.log(route.params.name)
+  console.log("screenName")
+
+  console.log("accessToken")
+  // console.log()
+  console.log(route.params.accessToken)
+  console.log("accessToken")
+
+  console.log("currentUser")
+  // console.log()
+  console.log("currentUser")
+  // console.log(state)
+  // console.log(state.accessToken)
+  // console.log(state.name)
+
+  // const { accessToken } = route.params;
+
+
+  console.log("navigation")
+  console.log(navigation)
+  console.log("navigation.getState()")
+  console.log(navigation.getState())
+  console.log("accessToken")
+  // console.log(accessToken)
+  console.log('route')
+  console.log(navigation.getState().route)
+  console.log('this.props.navigation.state')
+  console.log(navigation.state)
+
+
+
+  // console.log(props.accessToken + 'props.name')
+  // console.log(props)
   const handleSubmit = () => {
     login(usernameInput, passwordInput)
+    navigation.navigate('HomeScreen');
+
   }
 
   // AuthService.getValueFor("username", (data) => {
@@ -36,6 +74,7 @@ const LoginScreen = ({ navigation }) => {
         onChangeText={e => setUsernameInput(e)}
 
       />
+      <Text>{navigation.name} coucou</Text>
       <TextInput
         style={styles.inputRegisterLogin}
         placeholder="Mot de passe"
@@ -49,11 +88,8 @@ const LoginScreen = ({ navigation }) => {
         title="Se connecter"
         accessibilityLabel="Appuyez sur ce bouton pour vous connecter"
         // onPress={() => {
-        //   navigation.navigate('profile', {
-        //     pseudo: pseudo,
-        //     password: password,
-        //   });
-        //   console.log('Pseudo: ' + JSON.stringify(pseudo) + ' / ' + 'Password: ' + JSON.stringify(password));
+        //   handleSubmit;
+        //   // navigation.navigate('ProfilScreen');
         // }}
         onPress={handleSubmit}
       // sur le onpress je change les props 
