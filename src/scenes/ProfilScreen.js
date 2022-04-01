@@ -2,13 +2,15 @@ import { StyleSheet, Text, View, Button, TextInput, } from 'react-native';
 import styles from './styles.js';
 
 
-const ProfilScreen = ({ navigation, accessToken, currentUser }) => {
+const ProfilScreen = ({ navigation, accessToken, currentUser, route }) => {
     // const { pseudo, password } = route.params;
-    console.log(accessToken + 'profil')
-    console.log(currentUser + 'profil')
+
+    console.log(route.params.accessToken)
+    console.log(route.params.currentUser)
+    console.log('currentUser + accessToken')
     return (
         <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-            <Text style={styles}>Nom du profil: </Text>
+            <Text style={styles}>Nom du profil: {route.params.currentUser.username}</Text>  
             <Text style={styles}>Password: </Text>
             <Text style={styles}>Parties Jouées</Text>
             <Text style={styles}>Parties Gagnées</Text>

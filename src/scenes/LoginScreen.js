@@ -11,42 +11,28 @@ import { NavigationHelpersContext } from "@react-navigation/native";
 
 
 const LoginScreen = ({ navigation, route, props }) => {
+
   const [usernameInput, setUsernameInput] = useState({});
   const [passwordInput, setPasswordInput] = useState({});
   const [logChange, setLogChange] = useState(0)
-  console.log(usernameInput)
-  console.log(passwordInput)
+  // console.log(usernameInput)
+  // console.log(passwordInput)
+  const [user, setUser] = useState('');
 
-  console.log("screenName")
-  // console.log()
-  console.log(route.params.name)
-  console.log("screenName")
-
-  console.log("accessToken")
-  // console.log()
-  console.log(route.params.accessToken)
-  console.log("accessToken")
-
-  console.log("currentUser")
-  // console.log()
-  console.log("currentUser")
-  // console.log(state)
-  // console.log(state.accessToken)
-  // console.log(state.name)
-
-  // const { accessToken } = route.params;
+  // console.log('currentUser :) login screen')
+  // console.log(JSON.stringify(route.params.currentUser))
+  // console.log('currentUser :) login screen')
 
 
-  console.log("navigation")
-  console.log(navigation)
-  console.log("navigation.getState()")
-  console.log(navigation.getState())
-  console.log("accessToken")
-  // console.log(accessToken)
-  console.log('route')
-  console.log(navigation.getState().route)
-  console.log('this.props.navigation.state')
-  console.log(navigation.state)
+  // console.log(route.params.accessToken)
+  // console.log(route.params.loading)
+
+
+  // console.log("navigation.getState()")
+  // console.log(navigation.getState())
+
+  // console.log('this.props.navigation.state')
+  // console.log(navigation.state)
 
 
 
@@ -54,6 +40,7 @@ const LoginScreen = ({ navigation, route, props }) => {
   // console.log(props)
   const handleSubmit = () => {
     login(usernameInput, passwordInput)
+
     navigation.navigate('HomeScreen');
 
   }
@@ -88,11 +75,11 @@ const LoginScreen = ({ navigation, route, props }) => {
         title="Se connecter"
         accessibilityLabel="Appuyez sur ce bouton pour vous connecter"
         // onPress={() => {
-        //   handleSubmit;
-        //   // navigation.navigate('ProfilScreen');
+        //   handleSubmit,
+        //     navigation.navigate('ProfilScreen');
         // }}
         onPress={handleSubmit}
-      // sur le onpress je change les props 
+      // sur le onpress je change les props
       //ref={(c) => {
       //setLogChange(1);
       //}}
