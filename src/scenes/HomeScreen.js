@@ -7,7 +7,7 @@ import apiUrl from "../const";
 import { StatusBar } from 'expo-status-bar';
 import { useState, useEffect } from 'react';
 import { StyleSheet, Text, View, Button, TextInput, ScrollView, TouchableOpacity } from 'react-native';
-import { getValueFor, useToken } from '../services/AuthService';
+import { getValueFor, useToken, signOut } from '../services/AuthService';
 
 const HomeScreen = ({ navigation }) => {
     // localStorage.clear();
@@ -21,19 +21,16 @@ const HomeScreen = ({ navigation }) => {
 
     useFocusEffect(
         React.useCallback(() => {
-
-
             getValueFor('token').then(response => {
 
-                setAccessToken(response);
+                setAccessToken(response)
                 console.log(response)
-                console.log('mange moi le poiro')
+                console.log('response acessToken')
+                console.log('old acesstoken')
                 console.log(accessToken)
-                console.log('mange moi le poiro')
+                console.log('old acesstoken')
 
                 useToken(response).then(payload => {
-                    console.log('mangez moi le ooo')
-                    console.log(payload)
                     setCurrentUser({
                         id: payload.userId,
                         username: payload.username,
@@ -45,97 +42,11 @@ const HomeScreen = ({ navigation }) => {
                     console.log('mangez moi le ooo')
                 })
 
+            }).catch((error) => {
+                console.log('on est dans le catch')
             })
-            // je wait mon token avec le .then, je l'utilise a l'intérieur du .then
-
-            // const useToken = async (token) => {
-            //     // try {
-
-            //     try {
-            //         const axios = require('axios');
-            //         // const apiUrl = "http://localhost/auth/profile";
-            //         const config = {
-            //             headers: { Authorization: `Bearer ${token}` }
-            //         };
-            //         console.log(token)
-
-            //         const user = await axios.get(apiUrl + 'auth/profile', {
-            //             headers: { Authorization: `Bearer ${token}` }
-            //         })
-            //         console.log('user.response')
-            //         console.log(user.data)
-            //         let payload = user.data
-            //         console.log('user.response')
-            //        
-            //         console.log('currentUser')
-            //         console.log(currentUser);
-            //         console.log('currentUser')
-            //         return (payload);
-
-            //     } catch (e) {
-            //         console.log(e + 'wotifk???')
-            //         console.log(e.request)
-            //     }
-
-            // }
-
-
-
-
-
-            // if (typeof token !== 'undefined' && token !== 'Object { }') {
-            //     let result = useToken(token)
-            //     console.log('then app')
-            //     console.log(result)
-            //     console.log('then app')
-
-            // console.log(token + '  ki march')
-            // useToken(token).then(payload => payload.json())
-            //     .then(payload => {
-            //         console.log(payload)
-
-            //         console.log('jijijijijij')
-            //         if (payload !== 'undefined') {
-            //             console.log('jojojojojojojojojojoj')
-            //             console.log(payload)
-            //             console.log(JSON.stringify(payload))
-            //             setCurrentUser({
-            //                 id: payload.userId,
-            //                 username: payload.username,
-            //                 role: payload.role,
-            //                 idavatar: payload.idavatar,
-            //                 expiresIn: payload.exp
-            //             });
-            //             console.log('jujujujujujujuj')
-
-            //             console.log(currentUser + 'currentUser')
-            // }
-            // })
-            // }
-        }, [accessToken])
+        }, [accessToken]) // mettre accessToken pour tester si ça vient de la le fait que ça s'update pas 
     )
-
-
-
-
-
-    // const accessToken = AuthService.getCurrentUser();
-    // if (accessToken) {
-    //   AuthService.verifyToken(
-    //     accessToken,
-    //     (decoded) => {
-    //       setAccessToken(accessToken);
-    //       setCurrentUser({
-    //         id: decoded.sub,
-    //         username: decoded.username,
-    //         email: decoded.email,
-    //         firstname: decoded.firstname,
-    //         lastname: decoded.lastname,
-    //         role: decoded.role,
-    //       });
-
-
-
 
     return (
         <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
@@ -161,12 +72,12 @@ const HomeScreen = ({ navigation }) => {
                 title="Inscription"
                 accessibilityLabel="Appuyez sur ce bouton pour être redirigé vers la page de inscription"
             />
-            <Button
+            {/* <Button
                 style={styles.buttonRegisterLogin}
                 onPress={() => navigation.navigate('Menu')}
                 title="Menu des jeux"
                 accessibilityLabel="Appuyez sur ce bouton pour être redirigé vers la page de inscription"
-            />
+            /> */}
             <Button
                 style={styles.buttonRegisterLogin}
                 onPress={() => navigation.navigate('ProfilScreen', { currentUser: currentUser, accessToken: accessToken })}
@@ -175,10 +86,18 @@ const HomeScreen = ({ navigation }) => {
             />
             <Button
                 style={styles.buttonRegisterLogin}
-                onPress={() => navigation.navigate('LobbyScreen')}
+                onPress={() => navigation.navigate('LobbyScreen', { currentUser: currentUser, accessToken: accessToken })}
                 title="Menu du lobby"
                 accessibilityLabel="Appuyez sur ce bouton pour être redirigé vers la page de inscription"
             />
+            <Button
+                style={styles.buttonRegisterLogin}
+                onPress={() => navigation.navigate('CreateLobbyScreen', { currentUser: currentUser, accessToken: accessToken })}
+                title="Créer un nouveau lobby"
+                accessibilityLabel="Appuyez sur ce bouton pour être redirigé vers la page de création de partie"
+            />
+
+
         </View>
     );
 }

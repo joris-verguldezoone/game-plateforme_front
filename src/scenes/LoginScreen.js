@@ -1,16 +1,16 @@
 import React, { useState, useEffect } from "react";
 import { StyleSheet, Text, View, Button, TextInput, ScrollView, TouchableOpacity } from 'react-native';
 import styles from './styles.js';
-import AuthService from "../services/jeej";
 // import { useForm } from "react-hook-form";
 import * as SecureStore from 'expo-secure-store';
 import { login } from "../services/AuthService.js";
 import { NavigationHelpersContext } from "@react-navigation/native";
+import { SOCKET_URL } from '../const.js'
+import { io } from "socket.io-client";
 
 
 
-
-const LoginScreen = ({ navigation, route, props }) => {
+const LoginScreen = ({ navigation, route }) => {
 
   const [usernameInput, setUsernameInput] = useState({});
   const [passwordInput, setPasswordInput] = useState({});
@@ -40,11 +40,29 @@ const LoginScreen = ({ navigation, route, props }) => {
   // console.log(props)
   const handleSubmit = () => {
     login(usernameInput, passwordInput)
+    // .then(function (storage) {
+    //   console.log('storage as been set')
+    // })
 
     navigation.navigate('HomeScreen');
 
   }
+  // test socket 
 
+
+  // socket = io(SOCKET_URL)
+
+  // var socket = io();
+
+  // socket.on('chat message', function (msg) { // ça c'est juste pour du front
+  //   var item = document.createElement('li');
+  //   item.textContent = msg;
+  //   console.log(messages);
+  //   messages.appendChild(item);
+  //   window.scrollTo(0, document.body.scrollHeight);
+  // });
+
+  // test socket 
   // AuthService.getValueFor("username", (data) => {
   //   console.log(data)
 
