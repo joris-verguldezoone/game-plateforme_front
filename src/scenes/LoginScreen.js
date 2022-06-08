@@ -43,7 +43,7 @@ const LoginScreen = ({ navigation, route }) => {
     // .then(function (storage) {
     //   console.log('storage as been set')
     // })
-
+    console.log('handleSubmitLogin', usernameInput, passwordInput)
     navigation.navigate('HomeScreen');
 
   }

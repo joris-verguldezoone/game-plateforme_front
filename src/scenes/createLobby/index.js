@@ -10,33 +10,106 @@ import { useFocusEffect } from '@react-navigation/native';
 const CreateLobbyScreen = (navigation) => {
     const [getTeam, setTeam] = useState('0');
     const [myData, setMyData] = useState([]);
-    const [gameRule, setGameRule] = useState([]);
     const [selectedValue, setSelectedValue] = useState("select Game");
+    const [changeGame, setChangeGame] = useState(false);
 
-    const handleSubmit = () => {
-        console.log(selectedValue)
-        getOneGameRule(selectedValue).then(response => {
-            console.log("getTheRule")
-            console.log(response)
-            console.log("getTheRule")
-            setGameRule(response)
-        })
-        useFocusEffect(
-            React.useCallback(() => {
-                getAllGames().then(response => {
-                    console.log("getAllGames")
-                    console.log(response)
-                    console.log("getAllGames")
-                    setMyData(response)
-                })
-            }, []))
+    const [buttonSubmit, setbuttonSubmit] = useState(false);
 
+    const GameRuleComponent = (props) => {
+        const [gameRule, setGameRule] = useState({});
+        // if (props.changeGame == true) {
+        // console.log(props.selectedValue)
+        if (props.selectedValue != 'select Game') {
+            // console.log(props.selectedValue + "in the if")
+
+
+            getOneGameRule(props.selectedValue).then(response => {
+
+                // console.log('response getOneGameRule')
+                console.log(response)
+
+                setGameRule(response)
+
+                console.log('gameRule.idtype2.id')
+
+                console.log('hello', gameRule.idtype2.id)
+                console.log('gameRule.idtype2.id')
+
+            })
+
+
+            console.log('gameRule.idtype2')
+            console.log('ici', gameRule)
+            // console.log(gameRule.idtype2)
+            // console.log(gameRule.idtype2.id)
+            console.log('gameRule.idtype2')
+            return (
+                <View>
+                    <Text>coucou</Text>
+                    <Text>Type de carte : {gameRule.nom}</Text>
+                    {gameRule.hasOwnProperty('reglesjeux') && gameRule.reglesjeux.map(res => <><Text>id: {res.id}</Text><Text>Nombre de joueur minimum: {res.nbjoueurmin}</Text><Text>Nombre de joueur maximum: {res.nbjoueurmax}</Text><Text>Regle: {res.nomregle}</Text><Text>Description: {res.regle}</Text><Text>difficulté: {res.difficulte}</Text></>
+
+
+                        //               
+                        // idjeux": 1,
+                        //   "nbjoueurmax": 2,
+                        //   "nbjoueurmin": 2,
+                        //   "nomregle": "longTurn",
+
+
+                        // "iddifficulte": 1,
+                        //   "iddifficulte2": Object {
+                        //     "difficulte": "italienne",
+                        //     "id": 1,
+                        //     "multiplicateurscore": 2,
+                    )}
+                    {/* <Text>Type de jeux : {gameRule['idtype2'].typedejeux}</Text> */}
+                    {/* <Text>Type de carte : {gameRule['idtype2']["typedecarte"]}</Text>
+                    <Text>Nombre de carte : {gameRule['idtype2']['nbcartes']}</Text>
+                    <Text>Nombre de jeux carte : {gameRule['idtype2']['nbdejeux']}</Text> */}
+                    {/* <Text>Regle de jeux : {gameRule.reglesjeux[0].nomregle}</Text>
+                    <Text>Description : {gameRule.reglesjeux[0].regle}</Text> */}
+                    {/* <Text>Multiplicateur score : {props.gameRule['reglesjeux'][0].iddifficulte2.multiplicateurscore}</Text> */}
+                    {/* <Text>Difficulté : {props.gameRule['reglesjeux'][0].iddifficulte2.difficulte}</Text> */}
+                    {/* <Text>{props.gameRule['reglesjeux'][1].iddifficulte2.difficulte}</Text>
+                        <Text>{props.gameRule['reglesjeux'][0].iddifficulte2.difficulte}</Text> */}
+                </View>
+            )
+        }
+        else {
+            return (<View>
+                <Text>
+                    bad requeest 400
+
+                </Text>
+            </View>
+            );
+        }
+
+        // }
+        // else {
+        //     return (<View><Text>ccccccccc</Text></View>);
+
+        // }
     }
+
+
+
     useFocusEffect(
         React.useCallback(() => {
-            handleSubmit
+            // console.log(selectedValue)
 
-        }), [selectedValue])
+            getAllGames().then(response => {
+
+                setMyData(response)
+            })
+
+            // return () => { // cleanup
+            // setSelectedValue("select Game")
+            // }
+
+        }, [selectedValue]));
+
 
     // const joinTeam = () => {
     //     // .then(function (storage) {
@@ -59,7 +132,7 @@ const CreateLobbyScreen = (navigation) => {
                     onValueChange={(itemIndex) => setSelectedValue(itemIndex)}
                 >
                     <Picker.Item label='Selectionnez une valeur' value='' />
-                    {myData.map(r => <Picker.Item label={r.nom} value={r.id} />)}
+                    {(myData) && myData.map(r => <Picker.Item label={r.nom} value={r.id} key={r.id} />)}
 
                 </Picker>
                 <Button
@@ -67,19 +140,15 @@ const CreateLobbyScreen = (navigation) => {
                     title="Créer la partie"
                     disabled={true}
                     accessibilityLabel="Appuyez sur ce bouton pour créer une nouvelle partie"
-                    // onPress={() => {
-                    //   handleSubmit,
-                    //     navigation.navigate('ProfilScreen');
-                    // }}
-                    onPress={handleSubmit}
-
                 />
             </View>
+
             <View>
-                <Text>{gameRule.nomregle}</Text>
-                <Text>{gameRule.nbjoueurmin}</Text>
-                <Text>{gameRule.nbjoueurmax}</Text>
+                <GameRuleComponent selectedValue={selectedValue} />
             </View>
+
+
+
         </View>
     );
 }

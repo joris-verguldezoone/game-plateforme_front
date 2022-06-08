@@ -4,6 +4,8 @@ import * as SecureStore from 'expo-secure-store';
 
 export const login = (username, password) => {
 
+    console.log(username, password)
+
     axios.post(apiUrl + 'auth/login', {
         username,
         password,
@@ -18,6 +20,7 @@ export const login = (username, password) => {
         // })
     }).catch(function (error) {
         console.log(error.request)
+        console.log('???????llll')
 
     })
 }

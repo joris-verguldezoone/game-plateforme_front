@@ -20,22 +20,22 @@ export default function App() {
 
   // const [isSignedIn, setIsSignedIn] = useState();
   // const [chibre, setChibre] = useState();
-  const socket = io("http://51.75.241.128:3002",
-    // const socket = io("http://127.0.0.1:3002/",
-    {
-      reconnectionDelayMax: 10000,
-    }
-  );
+  // const socket = io("http://51.75.241.128:3002",
+  //   // const socket = io("http://127.0.0.1:3002/",
+  //   {
+  //     reconnectionDelayMax: 10000,
+  //   }
+  // );
 
   // socket.on("connect", () => {
   //   console.log(socket.connected); // true
   // });
 
-  const handleSubmit = () => {
-    console.log('where are in the handleSubmit')
-    socket.emit('join lobby');
+  // const handleSubmit = () => {
+  //   console.log('where are in the handleSubmit')
+  //   socket.emit('join lobby');
 
-  }
+  // }
 
   const blue = () => {
     console.log('where are in the blue')
@@ -69,7 +69,7 @@ export default function App() {
         {/* <Stack.Screen name="InfoJeu" component={GameInfoScreen} options={{ title: 'Info Jeu' }} /> */}
 
       </Stack.Navigator>
-      <View>
+      {/* <View>
         <TextInput
           placeholder="try something useless :)"
           // autoComplete="password"
@@ -117,7 +117,7 @@ export default function App() {
         //}}
         />
 
-      </View>
+      </View> */}
     </NavigationContainer >
   );
 }
