@@ -5,23 +5,49 @@ import { useState, useEffect } from "react";
 import { Text, View, Image, Input, ScrollView, Button, Picker } from 'react-native';
 import { getAllGames, getOneGameRule } from '../../services/CreateLobbyServices';
 import { useFocusEffect } from '@react-navigation/native';
+import axios from "axios"
+import { apiUrl } from "../../const"
 
 
-const CreateLobbyScreen = (navigation) => {
-    const [getTeam, setTeam] = useState('0');
-    const [myData, setMyData] = useState([]);
-    const [selectedValue, setSelectedValue] = useState("select Game");
-    const [changeGame, setChangeGame] = useState(false);
 
-    const [buttonSubmit, setbuttonSubmit] = useState(false);
+export function useIsMounted() {
+    const [isMounted, setIsMounted] = useState(false);
 
-    const GameRuleComponent = (props) => {
-        const [gameRule, setGameRule] = useState({});
-        // if (props.changeGame == true) {
-        // console.log(props.selectedValue)
-        if (props.selectedValue != 'select Game') {
-            // console.log(props.selectedValue + "in the if")
+    useEffect(() => {
+        setIsMounted(true);
+        console
+        return () => setIsMounted(false);
+    }, []);
 
+    return isMounted;
+}
+
+const GameRuleComponent = (props) => {
+    const [gameRule, setGameRule] = useState({});
+    const [difficulte, setDifficulte] = useState(0)
+    const [regle, setRegle] = useState()
+    // if (props.changeGame == true) {
+    console.log("before the if", props.selectedValue)
+
+
+
+    const isMounted = useIsMounted();
+
+    // useEffect(() => {
+    //     asyncOperation().then(data => {
+    //     })
+    // });
+
+    useEffect(() => {
+
+        if (props.selectedValue != 0) {
+            console.log(props.selectedValue + "in the if")
+
+
+
+            console.log('isMounted')
+            console.log(isMounted)
+            // if (isMounted) {
 
             getOneGameRule(props.selectedValue).then(response => {
 
@@ -32,72 +58,117 @@ const CreateLobbyScreen = (navigation) => {
 
                 console.log('gameRule.idtype2.id')
 
-                console.log('hello', gameRule.idtype2.id)
-                console.log('gameRule.idtype2.id')
+                // console.log('hello', gameRule.idtype2.id)
+                // console.log('gameRule.idtype2.id')
 
             })
-
-
-            console.log('gameRule.idtype2')
-            console.log('ici', gameRule)
-            // console.log(gameRule.idtype2)
-            // console.log(gameRule.idtype2.id)
-            console.log('gameRule.idtype2')
-            return (
-                <View>
-                    <Text>coucou</Text>
-                    <Text>Type de carte : {gameRule.nom}</Text>
-                    {gameRule.hasOwnProperty('reglesjeux') && gameRule.reglesjeux.map(res => <><Text>id: {res.id}</Text><Text>Nombre de joueur minimum: {res.nbjoueurmin}</Text><Text>Nombre de joueur maximum: {res.nbjoueurmax}</Text><Text>Regle: {res.nomregle}</Text><Text>Description: {res.regle}</Text><Text>difficulté: {res.difficulte}</Text></>
-
-
-                        //               
-                        // idjeux": 1,
-                        //   "nbjoueurmax": 2,
-                        //   "nbjoueurmin": 2,
-                        //   "nomregle": "longTurn",
-
-
-                        // "iddifficulte": 1,
-                        //   "iddifficulte2": Object {
-                        //     "difficulte": "italienne",
-                        //     "id": 1,
-                        //     "multiplicateurscore": 2,
-                    )}
-                    {/* <Text>Type de jeux : {gameRule['idtype2'].typedejeux}</Text> */}
-                    {/* <Text>Type de carte : {gameRule['idtype2']["typedecarte"]}</Text>
-                    <Text>Nombre de carte : {gameRule['idtype2']['nbcartes']}</Text>
-                    <Text>Nombre de jeux carte : {gameRule['idtype2']['nbdejeux']}</Text> */}
-                    {/* <Text>Regle de jeux : {gameRule.reglesjeux[0].nomregle}</Text>
-                    <Text>Description : {gameRule.reglesjeux[0].regle}</Text> */}
-                    {/* <Text>Multiplicateur score : {props.gameRule['reglesjeux'][0].iddifficulte2.multiplicateurscore}</Text> */}
-                    {/* <Text>Difficulté : {props.gameRule['reglesjeux'][0].iddifficulte2.difficulte}</Text> */}
-                    {/* <Text>{props.gameRule['reglesjeux'][1].iddifficulte2.difficulte}</Text>
-                        <Text>{props.gameRule['reglesjeux'][0].iddifficulte2.difficulte}</Text> */}
-                </View>
-            )
-        }
-        else {
-            return (<View>
-                <Text>
-                    bad requeest 400
-
-                </Text>
-            </View>
-            );
         }
 
-        // }
-        // else {
-        //     return (<View><Text>ccccccccc</Text></View>);
 
-        // }
+    }, [props.selectedValue])
+
+
+
+    const submitLobby = () => {
+
+        console.log("in submitLobby" + props.selectedValue, difficulte, regle)
+
+        console.log("coucou")
+        // axios.post(apiUrl + "partie", {
+        //     "nbjoueurs": 0,
+        //     "iddifficulte": difficulte,
+        //     "idjeux": jeu,
+        //     "createdat": "2022-06-08T20:18:22.452Z",
+        //     "finishedat": "2022-07-08T20:18:22.452Z"
+        // })
+        //     .then(function (response) {
+        //         console.log(response);
+        //         let prout = JSON.stringify(response)
+        //         console.log("ici", prout, 'ici');
+        //     })
+        //     .catch(function (error) {
+        //         console.log(error);
+        //     })
     }
 
 
+    if (gameRule.hasOwnProperty('reglesjeux')) {
 
-    useFocusEffect(
+        return (
+            <View>
+                <Text>coucou</Text>
+                <Text>Type de carte : {gameRule.nom}</Text>
+                {gameRule.hasOwnProperty('reglesjeux') && gameRule.reglesjeux.map((res, i) => <>
+
+                    <View style={{ backgroundColor: 'green' }}>
+                        <Text>id: {res.id}</Text>
+                        <Text>Nombre de joueur minimum: {res.nbjoueurmin}</Text>
+                        <Text>Nombre de joueur maximum: {res.nbjoueurmax}</Text>
+                        <Text>Regle: {res.nomregle}</Text>
+                        <Text>Description: {res.regle}</Text>
+
+                        <Button
+                            title="cccc"
+                            accessibilityLabel="Appuyez sur ce bouton pour selectionner une regle"
+                            id={res.id}
+                        // onPress={setRegle(res.id)}
+                        />
+                    </View></>
+                )}
+                {gameRule.hasOwnProperty('reglesjeux') && gameRule.reglesjeux.map(res => <>
+                    <View style={{ backgroundColor: 'blue' }}>
+                        <Text>difficulté: {res.iddifficulte2.difficulte}</Text>
+                        <Text>id: {res.iddifficulte2.id}</Text>
+                        <Text>multiplicateurscore: {res.iddifficulte2.multiplicateurscore}</Text>
+
+                        <Button
+                            title="Selectionner"
+                            accessibilityLabel="Appuyez sur ce bouton pour selectionner une difficulté"
+                            // onPress={s   etDifficulte(res.iddifficulte2.id)}
+                            id={(res.iddifficulte2.id)}
+                        />
+                    </View></>
+
+                )}
+                <Button
+                    title="Créer le lobby"
+                    accessibilityLabel="Appuyez sur ce bouton pour créer un lobby"
+                    onPress={submitLobby}
+                />
+            </View>
+        );
+    }
+    else {
+        return (<View>
+            <Text>
+                bad requeest 400
+
+            </Text>
+        </View>);
+
+    }
+}
+
+
+
+const CreateLobbyScreen = (navigation) => {
+    const [myData, setMyData] = useState([]);
+    const [selectedValue, setSelectedValue] = useState(0);
+
+    // const [getTeam, setTeam] = useState('0');
+    // const [changeGame, setChangeGame] = useState(false);
+    // const [buttonSubmit, setbuttonSubmit] = useState(false);
+
+    console.log('lucas');
+
+
+    const handleSubmit = (event) => {
+        console.log("ici", event, "ici")
+    }
+
+    useFocusEffect( // componentDidUpdate?
         React.useCallback(() => {
-            // console.log(selectedValue)
+            console.log("React.useCallback()", selectedValue)
 
             getAllGames().then(response => {
 
@@ -106,9 +177,9 @@ const CreateLobbyScreen = (navigation) => {
 
             // return () => { // cleanup
             // setSelectedValue("select Game")
-            // }
+            // } v
 
-        }, [selectedValue]));
+        }, []));
 
 
     // const joinTeam = () => {
@@ -120,35 +191,30 @@ const CreateLobbyScreen = (navigation) => {
     //     console.log(userName)
     //     console.log(profil_picture)
     // }
-
-
-
     return (
-        <View style={{ flex: 1, flexDirection: 'row', alignContent: 'flex-start', justifyContent: 'center' }}>
+        <View style={{ flex: 1, flexDirection: 'column', alignContent: 'center', justifyContent: 'center', width: '75%' }}>
             <View style={styles.container}>
                 <Picker
                     selectedValue={selectedValue}
                     style={{ height: 50, width: 150 }}
-                    onValueChange={(itemIndex) => setSelectedValue(itemIndex)}
+                    onValueChange={(itemIndex) => itemIndex === 'Selectionnez une valeur' ? setSelectedValue(0) : setSelectedValue(itemIndex)}
                 >
-                    <Picker.Item label='Selectionnez une valeur' value='' />
+                    <Picker.Item label='Selectionnez une valeur' value='0' />
                     {(myData) && myData.map(r => <Picker.Item label={r.nom} value={r.id} key={r.id} />)}
 
                 </Picker>
-                <Button
-                    style={styles.buttonRegisterLogin}
-                    title="Créer la partie"
-                    disabled={true}
-                    accessibilityLabel="Appuyez sur ce bouton pour créer une nouvelle partie"
-                />
+
             </View>
 
             <View>
                 <GameRuleComponent selectedValue={selectedValue} />
             </View>
-
-
-
+            {/* <Button
+                style={styles.buttonRegisterLogin}
+                title="Créer la partie"
+                disabled={true}
+                accessibilityLabel="Appuyez sur ce bouton pour créer une nouvelle partie"
+            /> */}
         </View>
     );
 }

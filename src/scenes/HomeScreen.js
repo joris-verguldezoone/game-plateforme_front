@@ -19,34 +19,34 @@ const HomeScreen = ({ navigation }) => {
 
 
 
-    useFocusEffect(
-        React.useCallback(() => {
-            getValueFor('token').then(response => {
+    // useFocusEffect(
+    //     React.useCallback(() => {
+    //         getValueFor('token').then(response => {
 
-                setAccessToken(response)
-                console.log(response)
-                console.log('response acessToken')
-                console.log('old acesstoken')
-                console.log(accessToken)
-                console.log('old acesstoken')
+    //             setAccessToken(response)
+    //             console.log(response)
+    //             console.log('response acessToken')
+    //             console.log('old acesstoken')
+    //             console.log(accessToken)
+    //             console.log('old acesstoken')
 
-                useToken(response).then(payload => {
-                    setCurrentUser({
-                        id: payload.userId,
-                        username: payload.username,
-                        role: payload.role,
-                        idavatar: payload.idavatar,
-                        expiresIn: payload.exp
-                    });
-                    console.log(currentUser)
-                    console.log('mangez moi le ooo')
-                })
+    //             useToken(response).then(payload => {
+    //                 setCurrentUser({
+    //                     id: payload.userId,
+    //                     username: payload.username,
+    //                     role: payload.role,
+    //                     idavatar: payload.idavatar,
+    //                     expiresIn: payload.exp
+    //                 });
+    //                 console.log(currentUser)
+    //                 console.log('mangez moi le ooo')
+    //             })
 
-            }).catch((error) => {
-                console.log('on est dans le catch')
-            })
-        }, [accessToken]) // mettre accessToken pour tester si ça vient de la le fait que ça s'update pas 
-    )
+    //         }).catch((error) => {
+    //             console.log('on est dans le catch')
+    //         })
+    //     }, [accessToken]) // mettre accessToken pour tester si ça vient de la le fait que ça s'update pas 
+    // )
 
     return (
         <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
