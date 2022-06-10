@@ -1,5 +1,5 @@
 import axios from "axios"
-import apiUrl from "../const";
+import { apiUrl } from "../const";
 import * as SecureStore from 'expo-secure-store';
 
 export const login = (username, password) => {

@@ -36,6 +36,25 @@ export const getOneGameRule = async (id) => {
     // console.log('CreateLobbyScreenServices')
     return dataPromise
 }
+export const createLobby = async (nbJoueurs, idDifficulte, idJeux, idRegle, idUser) => {
 
+    // déduire le nombre de joueurs via nbmax - nbmin dans le composant d'appel
+
+
+    axios.post(apiUrl + "parties", {
+        "nbjoueurs": 0,
+        "iddifficulte": idDifficulte,
+        "idjeux": idJeux,
+        "createdat": "2022-06-08T20:18:22.452Z",
+        "finishedat": "2022-07-08T20:18:22.452Z"
+    })
+        .then(function (response) {
+            console.log(response);
+            return response
+        })
+        .catch(function (error) {
+            console.log(error);
+        })
+}
 
 
