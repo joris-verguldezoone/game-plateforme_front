@@ -77,7 +77,7 @@ const LoginScreen = ({ navigation, route }) => {
         name="username"
         // value={user.username}
         onChangeText={e => setUsernameInput(e)}
-      /> {/* en vrai jpense c eclaté o sol comme méthode pcq ça doit rerender a chaque fois que t'écris une lettre */}
+      />
       <Text>{navigation.name} coucou</Text>
       <TextInput
         style={styles.inputRegisterLogin}

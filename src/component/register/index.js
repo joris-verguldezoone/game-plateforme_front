@@ -1,9 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { StyleSheet, Text, View, SafeAreaView, FlatList, ActivityIndicator } from 'react-native';
+import axios from "axios"
 
-
-
-const axios = require('axios');
 const apiUrl = "http://localhost/";
 
 const Register = (username, password, confPassword) => {

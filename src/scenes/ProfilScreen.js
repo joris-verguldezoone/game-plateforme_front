@@ -14,14 +14,14 @@ const ProfilScreen = ({ navigation, accessToken, currentUser, route }) => {
 
     console.log('currentUser + accessToken')
 
-    const handleSubmit = () => {
-        console.log(usernameInput)
-        profile(user.id, usernameInput)
+    // const handleSubmit = () => {
+    //     console.log(usernameInput)
+    //     profile(user.id, usernameInput)
 
 
-        // navigation.navigate('HomeScreen');
+    //     // navigation.navigate('HomeScreen');
 
-    }
+    // }
 
 
     return (

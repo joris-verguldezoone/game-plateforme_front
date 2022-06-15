@@ -8,15 +8,25 @@ import { useFocusEffect } from '@react-navigation/native';
 import axios from "axios"
 import { apiUrl } from "../../const"
 import GameRuleComponent from './GameRuleComponent';
+import { io } from "socket.io-client";
+import ClientComponent from '../../component/ClientComponent';
+import { SocketContext, socketIo } from '../socketContext';
 
-const CreateLobbyScreen = (navigation) => {
+const CreateLobbyScreen = (navigation, props) => {
     const [myData, setMyData] = useState([]);
     const [selectedValue, setSelectedValue] = useState(0);
+    // const socket = io("http://127.0.0.1:3002/",
+    //     // const socket = io("http://51.75.241.128:3002",
+    //     {
+    //         reconnectionDelayMax: 10000,
+    //     }
+    // );
 
     // const [getTeam, setTeam] = useState('0');
     // const [changeGame, setChangeGame] = useState(false);
     // const [buttonSubmit, setbuttonSubmit] = useState(false);
 
+    // console.log(props, 'props')
 
     useFocusEffect( // componentDidUpdate?
         React.useCallback(() => {
@@ -30,6 +40,19 @@ const CreateLobbyScreen = (navigation) => {
         }, []));
 
 
+    const [response, setResponse] = useState("");
+    const socket = React.useContext(SocketContext);
+
+    useEffect(() => {
+        const socket = socketIo// maintain connection 
+
+        socket.on("FromAPI", data => {
+            setResponse(data);
+            console.log(data, 'create')
+        });
+        return () => socket.disconnect();
+
+    }, []);
     // const joinTeam = () => {
     //     // .then(function (storage) {
     //     //   console.log('storage as been set')
@@ -40,24 +63,29 @@ const CreateLobbyScreen = (navigation) => {
     //     console.log(profil_picture)
     // }
     return (
-        <View style={{ flex: 1, flexDirection: 'column', alignContent: 'center', justifyContent: 'center', width: '75%' }}>
-            <View style={styles.container}>
-                <Picker
-                    selectedValue={selectedValue}
-                    style={{ height: 50, width: 150 }}
-                    onValueChange={(itemIndex) => itemIndex === 'Selectionnez une valeur' ? setSelectedValue(0) : setSelectedValue(itemIndex)}
-                >
-                    <Picker.Item label='Selectionnez une valeur' value='0' />
-                    {(myData) && myData.map(r => <Picker.Item label={r.nom} value={r.id} key={r.id} />)}
+        <>
+            {/* <ClientComponent>
+            </ClientComponent> */}
 
-                </Picker>
+            <View style={{ flex: 1, flexDirection: 'column', alignContent: 'center', justifyContent: 'center', width: '75%' }}>
+                <View style={styles.container}>
+                    <Picker
+                        selectedValue={selectedValue}
+                        style={{ height: 50, width: 150 }}
+                        onValueChange={(itemIndex) => itemIndex === 'Selectionnez une valeur' ? setSelectedValue(0) : setSelectedValue(itemIndex)}
+                    >
+                        <Picker.Item label='Selectionnez une valeur' value='0' />
+                        {(myData) && myData.map(r => <Picker.Item label={r.nom} value={r.id} key={r.id} />)}
 
+                    </Picker>
+
+                </View>
+
+                <View>
+                    <GameRuleComponent selectedValue={selectedValue} navigation={navigation} socket={socket} />
+                </View>
             </View>
-
-            <View>
-                <GameRuleComponent selectedValue={selectedValue} />
-            </View>
-        </View>
+        </>
     );
 }
 
