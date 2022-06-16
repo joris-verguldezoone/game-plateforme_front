@@ -10,7 +10,7 @@ import { apiUrl } from "../../const"
 import GameRuleComponent from './GameRuleComponent';
 import { io } from "socket.io-client";
 import ClientComponent from '../../component/ClientComponent';
-import { SocketContext, socketIo } from '../socketContext';
+// import { SocketContext, socketIo } from '../socketContext';
 
 const CreateLobbyScreen = (navigation, props) => {
     const [myData, setMyData] = useState([]);
@@ -41,18 +41,34 @@ const CreateLobbyScreen = (navigation, props) => {
 
 
     const [response, setResponse] = useState("");
-    const socket = React.useContext(SocketContext);
+    // const socket = React.useContext(SocketContext);
 
-    useEffect(() => {
-        const socket = socketIo// maintain connection 
+    // useFocusEffect(
+    //     React.useCallback(() => {
+    //         var inUse = true
+    //         const unsubscribe = navigation.navigation.addListener('focus', () => {
 
-        socket.on("FromAPI", data => {
-            setResponse(data);
-            console.log(data, 'create')
-        });
-        return () => socket.disconnect();
+    //             if (inUse) {
 
-    }, []);
+    //                 io.connect(SOCKET_URL).on("FromAPI", data => {
+    //                     setResponse(data);
+    //                     console.log(data, 'lobby')
+    //                 });
+
+    //             }
+    //         })
+    //         return () => {
+    //             io(SOCKET_URL).disconnect()
+    //             inUse = false;
+    //             setResponse("")
+    //             io(SOCKET_URL).on("disconnect", (socket) => {
+    //                 console.log(socket.id, ':--)'); // undefined
+    //                 return unsubscribe;
+    //             })
+
+    //         };
+    //     }, [])
+    // );
     // const joinTeam = () => {
     //     // .then(function (storage) {
     //     //   console.log('storage as been set')
@@ -82,7 +98,7 @@ const CreateLobbyScreen = (navigation, props) => {
                 </View>
 
                 <View>
-                    <GameRuleComponent selectedValue={selectedValue} navigation={navigation} socket={socket} />
+                    <GameRuleComponent socket={navigation.route.params.socket} selectedValue={selectedValue} navigation={navigation} />
                 </View>
             </View>
         </>

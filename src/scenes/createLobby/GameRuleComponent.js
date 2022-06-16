@@ -5,8 +5,10 @@ import { Text, View, Image, Input, ScrollView, Button, Picker } from 'react-nati
 import { getAllGames, getOneGameRule, createLobby } from '../../services/CreateLobbyServices';
 import { useFocusEffect } from '@react-navigation/native';
 import ClientComponent from "../../component/ClientComponent";
+import { io } from "socket.io-client";
+import { SOCKET_URL } from '../../const';
 
-const GameRuleComponent = (props, { navigation }) => {
+const GameRuleComponent = (props) => {
     const [gameRule, setGameRule] = useState({});
     const [difficulte, setDifficulte] = useState(0);
     const [regle, setRegle] = useState();
@@ -61,10 +63,13 @@ const GameRuleComponent = (props, { navigation }) => {
         // 0,0 je me suis rendu compte que ces champs ne servent a rien, on peut les déduire a partir 
         // de l'id regle en faisant un select + jointure
         // nbMin, nbMax, idJeux, idRegle, idDifficulte, idUser, nomLobby
-        props.socket.emit('create_lobby', nomLobby,); // mettre un id concaténé pour rendre l'émit unique et non reproductible 
-
+        // je crois qu'on s'en cogne d'utiliser les sockets mtn 
+        // io.connect(SOCKET_URL).emit('create_lobby', [regle.nbjoueurmin, regle.nbjoueurmax, props.selectedValue, regle.id, difficulte, 21, nomLobby]); // mettre un id concaténé pour rendre l'émit unique et non reproductible 
+        console.log(props.navigation)
         console.log("return", result)
-        props.navigation.navigation.navigate('LobbyScreen')
+        console.log(props.socket)
+        console.log(props)
+        props.navigation.navigation.navigate('LobbyScreen', { nomLobby: nomLobby, socket: props.socket })
     }
 
     // useFocusEffect(

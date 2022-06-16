@@ -9,7 +9,7 @@ import { socketIo, SocketContext } from "../scenes/socketContext"
 
 
 export default function ClientComponent() {
-    const socket = React.useContext(SocketContext);
+    // const socket = React.useContext(SocketContext);
 
     const [response, setResponse] = useState("");
     const contextValue = response[1]
@@ -33,9 +33,9 @@ export default function ClientComponent() {
 
     return (
         <>
-            <SocketContext.Provider value={contextValue}>
+            {/* <SocketContext.Provider value={contextValue}> */}
 
-            </SocketContext.Provider>
+            {/* </SocketContext.Provider> */}
             {/* <p>
                 It's <time dateTime={response}>{response[0]}</time> the user is : {response[1]}
             </p> */}

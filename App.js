@@ -25,7 +25,6 @@ export default function App() {
 
   const [isSignedIn, setIsSignedIn] = useState();
   const [chibre, setChibre] = useState();
-
   // const [response, setResponse] = useState("");
 
   const handleSubmit = () => {
@@ -39,17 +38,17 @@ export default function App() {
 
   }
 
-  const blue = () => {
-    console.log('where are in the blue')
-    socket.emit('blue');
+  // const blue = () => {
+  //   console.log('where are in the blue')
+  //   socket.emit('blue');
 
-  }
+  // }
 
-  const red = () => {
-    console.log('where are in the red')
-    socket.emit('red');
+  // const red = () => {
+  //   console.log('where are in the red')
+  //   socket.emit('red');
 
-  }
+  // }
   // const [loadClient, setLoadClient] = useState(true);
 
   // const SocketContext = React.createContext();
@@ -58,18 +57,6 @@ export default function App() {
 
   // const [response, setResponse] = useState("");
   // const socket = React.useContext(SocketContext);
-
-  // useEffect(() => {
-  //   const socket = socketIo// maintain connection 
-  //   socket.on("FromAPI", data => {
-
-  //     setResponse(data);
-  //     console.log(data)
-  //   });
-  //   return () => socket.disconnect();
-
-  // }, []);
-
 
 
 
@@ -96,7 +83,7 @@ export default function App() {
           {/* {(props) => <LoginScreen accessToken={accessToken} currentUser={currentUser} />} */}
           {/* </Stack.Screen> */}
 
-          <Stack.Screen name="LobbyScreen" component={LobbyScreen} options={{ title: 'Lobby', orientation: 'landscape', animation: 'flip' }} />
+          <Stack.Screen name="LobbyScreen" component={LobbyScreen} options={({ route, navigation }) => ({ title: 'Lobby', orientation: 'landscape', animation: 'flip' })} />
 
           {/* On navigue ves le stackScreen et son name */}
           <Stack.Screen name="ProfilScreen" component={ProfilScreen} options={{ title: 'Profil' }} />

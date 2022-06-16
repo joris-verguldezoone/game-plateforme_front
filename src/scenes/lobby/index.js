@@ -9,10 +9,34 @@ import { useFocusEffect } from '@react-navigation/native';
 import { io } from "socket.io-client";
 import { SOCKET_URL } from '../../const';
 import { SocketContext, socketIo } from '../socketContext';
-const LobbyScreen = (navigation) => {
+import { Manager } from "socket.io-client";
+
+const LobbyScreen = (navigation, route) => {
     const [getTeam, setTeam] = useState('0');
     const [userName, setUserName] = useState("")
     const [profil_picture, setProfil_picture] = useState("")
+    const [nomLobby, setNomLobby] = useState("")
+    const [socket, setSocket] = useState(navigation.route.params.socket);
+
+    console.log(navigation)
+    const kk = navigation.route.params.LobbyScreen
+    // console.log(route)
+    // console.log(route.params)
+
+    const joinLobby = () => {
+        io.connect(SOCKET_URL).emit('join_lobby_validate', [nomLobby, "userId"])
+    }
+    console.log('nomlobby', nomLobby)
+
+    if (nomLobby != undefined)
+        joinLobby
+    // emit join_lobby_validate
+
+    // useFocusEffect(
+    //     React.useCallback({
+
+    //     }, [])
+    // )
     // let coco = navigation.route.params.accessToken
     // console.log(coco)
     // let cc = navigation.route.params.currentUser
@@ -48,44 +72,65 @@ const LobbyScreen = (navigation) => {
     const [response, setResponse] = useState("");
     // const socket = React.useContext(SocketContext);
 
-    // const chaussette = socketIo
+    const manager = new Manager(SOCKET_URL, {
+        autoConnect: false
+    });
+
+    // const socket = manager.socket("/");
+
+
+    console.log(navigation.route.params.socket, 'il etait une fois ta grand mere')
+    console.log(navigation, ' : navigation')
 
     useFocusEffect(
         React.useCallback(() => {
-            // Do something when the screen is focused
-            // const socket = socketIo// maintain connection 
-            var inUse = true
-            const unsubscribe = navigation.navigation.addListener('focus', () => {
-                // socket
-                // console.log(socket, "socket")
-                // console.log(data, 'connection'))
-                if (inUse) {
+            let isSocketSubscribed = true;
+            console.log('in App useEffect')
+            setSocket(navigation.route.params.socket)
+            console.log(socket)
 
-                    io.connect(SOCKET_URL).on("FromAPI", data => {
-                        setResponse(data);
-                        console.log(data, 'lobby')
+            setNomLobby(navigation.route.params.nomLobby)
 
-                        // io(SOCKET_URL).connect().disconnect()
-                        // console.log(io(SOCKET_URL).connect().disconnect())
-                        // console.log(io(SOCKET_URL).connect().status)
-                    });
-
+            console.log(nomLobby, 'nom lobby')
+            console.log(nomLobby.length, 'len')
+            if (socket != null) {
+                if (isSocketSubscribed) {
+                    console.log("emit réussi")
+                    socket.emit('join_lobby_validate', navigation.route.params.nomLobby);
                 }
-            })
-            return () => {
-                io(SOCKET_URL).disconnect()
-                // console.log(io(SOCKET_URL).disconnect())
-                inUse = false;
-                // socket = ""
-                setResponse("")
-                io(SOCKET_URL).on("disconnect", (socket) => {
-                    console.log(socket.id, ':--)'); // undefined
-                    return unsubscribe;
-                })
+            }
+            if (socket != null) {
+                return () => isSocketSubscribed = false;
 
-            };
-        }, [])
+                // io(SOCKET_URL).disconnect()
+                // console.log(io(SOCKET_URL).disconnect())
+                // socket = ""
+                // setResponse("")
+
+
+            }
+
+        }, [socket])
     );
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -93,8 +138,12 @@ const LobbyScreen = (navigation) => {
         <><>
             {/* <ClientComponent> */}
             {/* </ClientComponent> */}
-        </><View style={{ flex: 1, flexDirection: 'row', alignContent: 'flex-start', justifyContent: 'center' }}>
+        </>
+            <View style={{ flex: 1, flexDirection: 'row', alignContent: 'flex-start', justifyContent: 'center' }}>
                 <View style={styles.ViewLobby1}>
+
+                    <Text>Nom du lobby: {nomLobby}</Text>
+
                     <ScrollView>
                         <View style={styles.LineLobby}>
                             <Image styles={styles.ImagePlayerLobby} />

@@ -8,13 +8,16 @@ import { StatusBar } from 'expo-status-bar';
 import { useState, useEffect } from 'react';
 import { StyleSheet, Text, View, Button, TextInput, ScrollView, TouchableOpacity } from 'react-native';
 import { getValueFor, useToken, signOut } from '../services/AuthService';
-import ClientComponent from '../component/ClientComponent';
+// import ClientComponent from '../component/ClientComponent';
+import { socketIo } from './socketContext'
 const HomeScreen = ({ navigation }) => {
     // localStorage.clear();
     const [accessToken, setAccessToken] = useState('');
     const [currentUser, setCurrentUser] = useState('');
     const [login, setLogin] = useState();
     const [password, setPassword] = useState();
+    const [socket, setSocket] = useState(null);
+
     // faut set un state loading, quand il est validé par loginScreen alors App nous fait switch sur profil par exemple   
 
 
@@ -49,6 +52,42 @@ const HomeScreen = ({ navigation }) => {
             })
         }, []) // mettre accessToken pour tester si ça vient de la le fait que ça s'update pas 
     )
+
+    useFocusEffect( // componentDidUpdate?
+        React.useCallback(() => {
+            let isSocketSubscribed = true;
+            setSocket(socketIo)
+
+            console.log('in App useEffect')
+            console.log(socket)
+            if (socket != null) {
+                // if (socket.connected == false)
+                // socket.connect()
+
+                socket.on("FromAPI", data => {
+                    if (isSocketSubscribed) {
+
+                        console.log(data, 'FromAPI')
+                        console.log("coucou")
+                    }
+                });
+            }
+            if (socket != null) {
+                // console.log('disconnect')
+                return () => {
+                    // socket.disconnect();
+                    // setSocket(null)
+                    isSocketSubscribed = false;
+
+                }
+            }
+
+
+        }, [socket]))
+
+
+
+
 
     return (
         <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
@@ -88,19 +127,19 @@ const HomeScreen = ({ navigation }) => {
             />
             <Button
                 style={styles.buttonRegisterLogin}
-                onPress={() => navigation.navigate('LobbyScreen', { currentUser: currentUser, accessToken: accessToken })}
+                onPress={() => navigation.navigate('LobbyScreen', { socket: socket, currentUser: currentUser, accessToken: accessToken })}
                 title="Menu du lobby"
                 accessibilityLabel="Appuyez sur ce bouton pour être redirigé vers la page de inscription"
             />
             <Button
                 style={styles.buttonRegisterLogin}
-                onPress={() => navigation.navigate('CreateLobbyScreen', { currentUser: currentUser, accessToken: accessToken })}
+                onPress={() => navigation.navigate('CreateLobbyScreen', { socket: socket, currentUser: currentUser, accessToken: accessToken })}
                 title="Créer un nouveau lobby"
                 accessibilityLabel="Appuyez sur ce bouton pour être redirigé vers la page de création de partie"
             />
             <Button
                 style={styles.buttonRegisterLogin}
-                onPress={() => navigation.navigate('LobbyList', { currentUser: currentUser, accessToken: accessToken })}
+                onPress={() => navigation.navigate('LobbyList', { zoulette: 'soulette', socket: socket, currentUser: currentUser, accessToken: accessToken })}
                 title="Liste des lobby"
                 accessibilityLabel="Appuyez sur ce bouton pour être redirigé vers la liste des lobby"
             />
