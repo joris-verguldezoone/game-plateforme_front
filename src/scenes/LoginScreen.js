@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { StyleSheet, Text, View, Button, TextInput, ScrollView, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, View, Button, TextInput, ScrollView, Image, TouchableOpacity } from 'react-native';
 import styles from './styles.js';
 // import { useForm } from "react-hook-form";
 import * as SecureStore from 'expo-secure-store';
@@ -69,38 +69,42 @@ const LoginScreen = ({ navigation, route }) => {
   // });
 
   return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <TextInput
-        style={styles.inputRegisterLogin}
-        placeholder="Pseudo"
-        // autoComplete="name"
-        name="username"
-        // value={user.username}
-        onChangeText={e => setUsernameInput(e)}
-      /> {/* en vrai jpense c eclaté o sol comme méthode pcq ça doit rerender a chaque fois que t'écris une lettre */}
-      <Text>{navigation.name} coucou</Text>
-      <TextInput
-        style={styles.inputRegisterLogin}
-        placeholder="Mot de passe"
-        // autoComplete="password"
-        name="password"
-        // value={user.password}
-        onChangeText={e => setPasswordInput(e)}
-      />
-      <Button
-        style={styles.buttonRegisterLogin}
-        title="Se connecter"
-        accessibilityLabel="Appuyez sur ce bouton pour vous connecter"
-        // onPress={() => {
-        //   handleSubmit,
-        //     navigation.navigate('ProfilScreen');
-        // }}
-        onPress={handleSubmit}
-      // sur le onpress je change les props
-      //ref={(c) => {
-      //setLogChange(1);
-      //}}
-      />
+    <View style={styles.mainView}>
+      <View style={styles.topView}>
+        <View style={styles.divRound}>
+            <Image
+                style={styles.imageLogo}
+                source={require('./logo.png')}
+            />
+        </View>
+      </View>
+      <View style={styles.middleView}>
+        <Text style={styles.textTitle}>Connexion</Text>
+        <View style={styles.popUpView}>
+          <View>
+            <Text style={styles.popUpTextError}>Adresse Mail incorrect !</Text>
+            <Text style={styles.popUpText}>Identifiant</Text>
+            <TextInput style={styles.popUpTextInput}></TextInput>
+
+            <Text style={styles.popUpText}>Mot de passe</Text>
+            <TextInput style={styles.popUpTextInput}></TextInput>
+            
+            <View style={{flex:3}}>
+              <Text style={styles.popUpOption}>Mot de passe oublié ?</Text>
+              <Button 
+              title="Se Connecter"
+              color="#6CA054"
+              />
+            </View>
+          </View>
+
+        </View>
+      </View>
+      <View style={styles.bottomView}>
+        <View>
+          <Text></Text>
+        </View>
+      </View>
     </View>
   );
 }

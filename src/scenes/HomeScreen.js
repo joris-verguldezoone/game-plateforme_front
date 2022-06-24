@@ -6,7 +6,7 @@ import apiUrl from "../const";
 
 import { StatusBar } from 'expo-status-bar';
 import { useState, useEffect } from 'react';
-import { StyleSheet, Text, View, Button, TextInput, ScrollView, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, View, Button, TextInput, ScrollView, TouchableOpacity, Image } from 'react-native';
 import { getValueFor, useToken, signOut } from '../services/AuthService';
 
 const HomeScreen = ({ navigation }) => {
@@ -49,57 +49,82 @@ const HomeScreen = ({ navigation }) => {
     // )
 
     return (
-        <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-            <Text style={styles}>Bienvenue sur CBGames!</Text>
-            <Text style={styles}>Veuillez vous connecter/vous enregistrer</Text>
-            <Button
-                style={styles.buttonRegisterLogin}
+        <View style={styles.mainView}>
+            <View style={styles.topView}>
+                <View style={styles.divRound}>
+                    <Image
+                        style={styles.imageLogo}
+                        source={require('./logo.png')}
+                    />
+                </View>
+            </View>
+            <View style={styles.middleView}>
+                <Text style={styles.textTitle}>Bienvenue sur CBGames !</Text>
+                <View style={styles.popUpView}>
+                    
+                    <Text style={styles.popUpTextStart}>Rejoignez-nous:</Text>
 
-                title="Connexion"
-                onPress={() => {
-                    navigation.navigate('LoginScreen', { currentUser: currentUser, accessToken: accessToken })
-                    // navigation.setOptions
-                }
-                }
+                    <Button
+                        style={styles.buttonRegisterLogin}
+                        title="Connexion"
+                        color='#6CA054'
+                        onPress={() => {
+                            navigation.navigate('LoginScreen', { currentUser: currentUser, accessToken: accessToken })
+                            // navigation.setOptions
+                        }
+                        }
+                        // onPress={() => navigation.navigate('Connexion')}
+                        // title="Connexion"
+                        accessibilityLabel="Appuyez sur ce bouton pour être redirigé vers la page de connexion"
+                    />
 
-                // onPress={() => navigation.navigate('Connexion')}
-                // title="Connexion"
-                accessibilityLabel="Appuyez sur ce bouton pour être redirigé vers la page de connexion"
-            />
-            <Button
-                style={styles.buttonRegisterLogin}
-                onPress={() => navigation.navigate('Inscription')}
-                title="Inscription"
-                accessibilityLabel="Appuyez sur ce bouton pour être redirigé vers la page de inscription"
-            />
-            {/* <Button
-                style={styles.buttonRegisterLogin}
-                onPress={() => navigation.navigate('Menu')}
-                title="Menu des jeux"
-                accessibilityLabel="Appuyez sur ce bouton pour être redirigé vers la page de inscription"
-            /> */}
-            <Button
-                style={styles.buttonRegisterLogin}
-                onPress={() => navigation.navigate('ProfilScreen', { currentUser: currentUser, accessToken: accessToken })}
-                title="Profil"
-                accessibilityLabel="Appuyez sur ce bouton pour être redirigé vers la page Profil"
-            />
-            <Button
-                style={styles.buttonRegisterLogin}
-                onPress={() => navigation.navigate('LobbyScreen', { currentUser: currentUser, accessToken: accessToken })}
-                title="Menu du lobby"
-                accessibilityLabel="Appuyez sur ce bouton pour être redirigé vers la page de inscription"
-            />
-            <Button
-                style={styles.buttonRegisterLogin}
-                onPress={() => navigation.navigate('CreateLobbyScreen', { currentUser: currentUser, accessToken: accessToken })}
-                title="Créer un nouveau lobby"
-                accessibilityLabel="Appuyez sur ce bouton pour être redirigé vers la page de création de partie"
-            />
+                    <View style={{flex:2, alignItems:'center', justifyContent:'center', width:300}}>
+                        <Text style={{fontSize:20, padding:5, color:'#DFE2DF'}}>- OU -</Text>
+                    </View>
 
+                    <Button
+                        style={styles.buttonRegisterLogin}
+                        onPress={() => navigation.navigate('RegisterScreen')}
+                        title="Inscription"
+                        color="#6CA054"
+                        accessibilityLabel="Appuyez sur ce bouton pour être redirigé vers la page de inscription"
+                    />
+                    
+                    
+                </View>
+            </View>
+            <View style={{flex:2, alignItems: 'center', justifyContent: 'center'}}>
 
+            </View>
         </View>
     );
 }
 
 export default HomeScreen;
+
+{/* <Button
+                        style={styles.buttonRegisterLogin}
+                        onPress={() => navigation.navigate('Menu')}
+                        title="Menu des jeux"
+                        accessibilityLabel="Appuyez sur ce bouton pour être redirigé vers la page de inscription"
+                    /> */}
+                    {/*
+                    <Button
+                        style={styles.buttonRegisterLogin}
+                        onPress={() => navigation.navigate('ProfilScreen', { currentUser: currentUser, accessToken: accessToken })}
+                        title="Profil"
+                        accessibilityLabel="Appuyez sur ce bouton pour être redirigé vers la page Profil"
+                    />
+                    <Button
+                        style={styles.buttonRegisterLogin}
+                        onPress={() => navigation.navigate('LobbyScreen', { currentUser: currentUser, accessToken: accessToken })}
+                        title="Menu du lobby"
+                        accessibilityLabel="Appuyez sur ce bouton pour être redirigé vers la page de inscription"
+                    />
+                    <Button
+                        style={styles.buttonRegisterLogin}
+                        onPress={() => navigation.navigate('CreateLobbyScreen', { currentUser: currentUser, accessToken: accessToken })}
+                        title="Créer un nouveau lobby"
+                        accessibilityLabel="Appuyez sur ce bouton pour être redirigé vers la page de création de partie"
+                    />
+                    */}

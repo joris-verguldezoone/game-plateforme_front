@@ -52,19 +52,67 @@ export default function App() {
     <NavigationContainer>
       <Stack.Navigator>
         {/* props contient déjà la navigation */}
-        <Stack.Screen name="HomeScreen" component={HomeScreen} options={{ title: "Accueil" }} />
+        <Stack.Screen name="HomeScreen" component={HomeScreen} options={{ title: 'Accueil',
+          headerStyle: {
+            backgroundColor: '#3F403F',
+          },
+          headerTintColor: '#fff',
+          headerTitleStyle: {
+            fontWeight: 'bold',
+            
+          },}} />
         {/* {(props) => <HomeScreen {...props} />} */}
 
-        <Stack.Screen name="RegisterScreen" component={RegisterScreen} options={{ title: 'Register' }} />
-        <Stack.Screen name="LoginScreen" component={LoginScreen} options={{ title: 'Connexion' }} />
+        <Stack.Screen name="RegisterScreen" component={RegisterScreen} options={{ title: 'Inscription',
+          headerStyle: {
+            backgroundColor: '#3F403F',
+          },
+          headerTintColor: '#fff',
+          headerTitleStyle: {
+            fontWeight: 'bold',
+            
+          }, }} />
+        <Stack.Screen name="LoginScreen" component={LoginScreen} options={{ title: 'Connexion',
+          headerStyle: {
+            backgroundColor: '#3F403F',
+          },
+          headerTintColor: '#fff',
+          headerTitleStyle: {
+            fontWeight: 'bold',
+            
+          }, }} />
         {/* {(props) => <LoginScreen accessToken={accessToken} currentUser={currentUser} />} */}
         {/* </Stack.Screen> */}
 
-        <Stack.Screen name="LobbyScreen" component={LobbyScreen} options={{ title: 'Lobby', orientation: 'landscape', animation: 'flip' }} />
+        <Stack.Screen name="LobbyScreen" component={LobbyScreen} options={{ title: 'Lobby',
+          headerStyle: {
+            backgroundColor: '#3F403F',
+          },
+          headerTintColor: '#fff',
+          headerTitleStyle: {
+            fontWeight: 'bold',
+            
+          }, orientation: 'landscape', animation: 'flip' }} />
 
         {/* On navigue ves le stackScreen et son name */}
-        <Stack.Screen name="ProfilScreen" component={ProfilScreen} options={{ title: 'Profil' }} />
-        <Stack.Screen name="CreateLobbyScreen" component={CreateLobbyScreen} options={{ title: 'CreateLobby' }} />
+        <Stack.Screen name="ProfilScreen" component={ProfilScreen} options={{ title: 'Profil',
+          headerStyle: {
+            backgroundColor: '#3F403F',
+          },
+          headerTintColor: '#fff',
+          headerTitleStyle: {
+            fontWeight: 'bold',
+            
+          }}} />
+        <Stack.Screen name="CreateLobbyScreen" component={CreateLobbyScreen} options={{ title: 'CreateLobby',
+          headerStyle: {
+            backgroundColor: '#3F403F',
+          },
+          headerTintColor: '#fff',
+          headerTitleStyle: {
+            fontWeight: 'bold',
+            
+          }}} />
         {/* <Stack.Screen name="Menu" component={MainScreen} options={{ title: 'Menu' }} /> */}
         {/* <Stack.Screen name="InfoJeu" component={GameInfoScreen} options={{ title: 'Info Jeu' }} /> */}
 
