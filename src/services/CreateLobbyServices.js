@@ -21,7 +21,7 @@ export const getAllGames = async () => {
     return dataPromise
 }
 
-export const getOneGameRule = async (id) => {
+export const getOneGameRule = (id) => {
 
     const promise = axios.get(apiUrl + 'jeux/find?id=' + id)
     // console.log(apiUrl + 'jeux/find?id=' + id)

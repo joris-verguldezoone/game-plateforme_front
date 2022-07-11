@@ -73,7 +73,6 @@ const LobbyList = (navigation) => {
     //         return setAction(false)
 
     //     }, []))
-    console.log(navigation.route.params.socket, 'il etait une fois ta grand mere')
     console.log(navigation, ' : navigation')
     // console.log(navigation.navigation, "1")
     useFocusEffect( // componentDidUpdate?
@@ -111,18 +110,20 @@ const LobbyList = (navigation) => {
 
     return (
         <View style={styles.container}>
-            <Text>roucoul</Text>
             {/* condition a retravailler */}
-            {(myData != []) && (
-                <><Text>coucou</Text><Table borderStyle={{ borderWidth: 2, borderColor: '#c8e1ff' }}>
+            <ScrollView>
 
-                    <Row data={thead} style={styles.head} textStyle={styles.text} />
+                {(myData != []) && (
+                    <><Text>coucou</Text><Table borderStyle={{ borderWidth: 2, borderColor: '#c8e1ff' }}>
 
-                    <Rows data={myData} textStyle={styles.text} />
+                        <Row data={thead} style={styles.head} textStyle={styles.text} />
 
-                </Table></>
-            )
-            }
+                        <Rows data={myData} textStyle={styles.text} />
+
+                    </Table></>
+                )
+                }
+            </ScrollView>
         </View >
     );
 }

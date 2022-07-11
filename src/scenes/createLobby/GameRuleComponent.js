@@ -69,7 +69,8 @@ const GameRuleComponent = (props) => {
         console.log("return", result)
         console.log(props.socket)
         console.log(props)
-        props.navigation.navigation.navigate('LobbyScreen', { nomLobby: nomLobby, socket: props.socket })
+        console.log(regle.nbjoueurmax, " regle.nbjoueurmax")
+        props.navigation.navigation.navigate('LobbyScreen', { nomLobby: nomLobby, socket: props.socket, currentUser: props.currentUser, nbPlayerMax: regle.nbjoueurmax })
     }
 
     // useFocusEffect(

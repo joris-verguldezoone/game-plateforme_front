@@ -38,13 +38,13 @@ const LoginScreen = ({ navigation, route }) => {
 
   // console.log(props.accessToken + 'props.name')
   // console.log(props)
-  const handleSubmit = () => {
-    login(usernameInput, passwordInput)
+  const handleSubmit = async () => {
+    let tokenn = await login(usernameInput, passwordInput)
     // .then(function (storage) {
     //   console.log('storage as been set')
     // })
     console.log('handleSubmitLogin', usernameInput, passwordInput)
-    navigation.navigate('HomeScreen');
+    navigation.navigate('HomeScreen', { tokenn: tokenn });
 
   }
   // test socket 

@@ -14,42 +14,39 @@ const HomeScreen = ({ navigation }) => {
     // localStorage.clear();
     const [accessToken, setAccessToken] = useState('');
     const [currentUser, setCurrentUser] = useState('');
+
     const [login, setLogin] = useState();
     const [password, setPassword] = useState();
     const [socket, setSocket] = useState(null);
 
     // faut set un state loading, quand il est validé par loginScreen alors App nous fait switch sur profil par exemple   
 
-
-
     useFocusEffect(
         React.useCallback(() => {
-            getValueFor('token').then(response => {
-                console.log('old acesstoken')
-                console.log(accessToken)
-                setAccessToken(response)
-                console.log(response)
-                console.log('response acessToken')
-                console.log('old acesstoken')
-                console.log('new acesstoken')
-                console.log(accessToken)
-                console.log('new acesstoken')
-
-                useToken(response).then(payload => {
+            console.log(navigation.route, "navigation.route")
+            const fetchData = async () => {
+                const payload = await useToken().then((response) => {
+                    // console.log(response, ' in use effect')
                     setCurrentUser({
-                        id: payload.userId,
-                        username: payload.username,
-                        role: payload.role,
-                        idavatar: payload.idavatar,
-                        expiresIn: payload.exp
+                        id: response.userId,
+                        username: response.username,
+                        role: response.role,
+                        idavatar: response.idavatar,
+                        expiresIn: response.exp
                     });
                     console.log(currentUser)
-                    console.log('mangez moi le ooo')
                 })
 
-            }).catch((error) => {
-                console.log('on est dans le catch')
-            })
+
+            }
+            fetchData()
+
+            return () => {
+                // socket.disconnect();
+                // setSocket(null)
+
+            }
+
         }, []) // mettre accessToken pour tester si ça vient de la le fait que ça s'update pas 
     )
 
@@ -65,11 +62,11 @@ const HomeScreen = ({ navigation }) => {
                 // socket.connect()
 
                 socket.on("FromAPI", data => {
-                    if (isSocketSubscribed) {
+                    // if (isSocketSubscribed) {
 
-                        console.log(data, 'FromAPI')
-                        console.log("coucou")
-                    }
+                    console.log(data, 'FromAPI')
+                    console.log("coucou")
+                    // }
                 });
             }
             if (socket != null) {
@@ -81,8 +78,6 @@ const HomeScreen = ({ navigation }) => {
 
                 }
             }
-
-
         }, [socket]))
 
 
@@ -143,7 +138,11 @@ const HomeScreen = ({ navigation }) => {
                 title="Liste des lobby"
                 accessibilityLabel="Appuyez sur ce bouton pour être redirigé vers la liste des lobby"
             />
-
+            {/* {socket ? null : */}
+            {/* <Button onPress={() => socket.disconnect()}>
+                STOP CLIENT
+            </Button> */}
+            {/* } */}
 
 
         </View>

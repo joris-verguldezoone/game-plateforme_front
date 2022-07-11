@@ -6,51 +6,57 @@ export const login = async (username, password) => {
     console.log("loginAuth")
     console.log(username, password)
 
-    const result = await axios.post(apiUrl + 'auth/login', {
+    return await axios.post(apiUrl + 'auth/login', {
         username,
         password,
+    }).then(async (response) => {
+        let token = response.data.access_token
+        console.log(response, 'iciii')
+        console.log(response.data.access_token, 'iciii.data LOGIn')
+        // setTimeout(async () => {
+        await local_setItem("token", response.data.access_token).then(async () => {
+            return token // n'est pas sensé servir a qqchose 
+
+            // console.log(await getValueFor('token'), "console.log(getValueFor('token'), )")
+        }) // Si on est en mobile on va l"utiliser sinon nn  
+        //     // console.log("Delayed for 1 second.");
+        // }, "1000")
+    }).catch(e => {
+        console.log(e)
+        console.log("login services error")
     })
-    let token = result.data['access_token'];
-    const cc = await local_setItem('token', token);
-    console.log(token)
-    console.log(cc)
-    console.log('new token')
-    console.log("loginAuth")
-
-    // getValueFor('token').then(response => {
-    //     console.log(response)
-    //     console.log('AuthService get value for')
-    // })
-
 }
 // ne sert pas au profil, sert a décoder le token #boloss
-export const useToken = async (token) => {
 
-    try {
-        // const config = {
-        //     headers: { Authorization: `Bearer ${token}` }
-        // };
 
-        console.log('AuthServices', token)
 
-        const user = await axios.get(apiUrl + 'auth/profile', {
-            headers: { Authorization: `Bearer ${token}` }
-        })
-        console.log(user)
-        console.log(user.data)
-        return (user.data);
 
-    } catch (e) {
+export const useToken = async () => { // obtenir le payload qui est décodé dans le back 
+    const token = await getValueFor("token")
+    // .then((response) => {
+    //     console.log('AuthServices UseToken getToken', response)
+    //     console.log(response, "le token officiel qui vient d'etre get")
+
+    // })
+    console.log(token, ' verif nico')
+    return await axios.get(apiUrl + 'auth/profile', {
+        headers: { Authorization: `Bearer ${token}` }
+    }).then(response => {
+        console.log(response)
+        console.log(response.data, 'AuthServices UseToken response.data')
+        return response.data
+    }).catch(async e => {
+        await signOut() // autant vider le localStorage
+
         console.log(e + 'wotifk???')
         console.log(e.request)
-    }
+    })
 
 }
 
 export const local_setItem = async (key, item) => {
-    console.log(SecureStore.isAvailableAsync("token"))
-    console.log(SecureStore)
-    console.log("SecureStore")
+    console.log(SecureStore.isAvailableAsync("token"), "SecureStore.isAvailableAsync")
+    console.log(key, item, "SecureStore")
     await SecureStore.setItemAsync(key, item);
 }
 

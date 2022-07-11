@@ -12,7 +12,7 @@ import { io } from "socket.io-client";
 import ClientComponent from '../../component/ClientComponent';
 // import { SocketContext, socketIo } from '../socketContext';
 
-const CreateLobbyScreen = (navigation, props) => {
+const CreateLobbyScreen = (navigation, props,) => {
     const [myData, setMyData] = useState([]);
     const [selectedValue, setSelectedValue] = useState(0);
     // const socket = io("http://127.0.0.1:3002/",
@@ -22,11 +22,18 @@ const CreateLobbyScreen = (navigation, props) => {
     //     }
     // );
 
+    console.log(props, 'props createLobby')
+    console.log(navigation.route.params.currentUser, 'currentUser from direct props ')
+
     // const [getTeam, setTeam] = useState('0');
     // const [changeGame, setChangeGame] = useState(false);
     // const [buttonSubmit, setbuttonSubmit] = useState(false);
 
     // console.log(props, 'props')
+
+    console.log(navigation, ' : navigation createLobby')
+    console.log(navigation.route, ' : navigation createLobby')
+    console.log(navigation.route.params, ' : navigation createLobby params')
 
     useFocusEffect( // componentDidUpdate?
         React.useCallback(() => {
@@ -98,7 +105,7 @@ const CreateLobbyScreen = (navigation, props) => {
                 </View>
 
                 <View>
-                    <GameRuleComponent socket={navigation.route.params.socket} selectedValue={selectedValue} navigation={navigation} />
+                    <GameRuleComponent socket={navigation.route.params.socket} currentUser={navigation.route.params.currentUser} selectedValue={selectedValue} navigation={navigation} />
                 </View>
             </View>
         </>
