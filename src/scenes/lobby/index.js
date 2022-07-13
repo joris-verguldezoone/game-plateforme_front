@@ -45,7 +45,6 @@ const LobbyScreen = (navigation) => {
 
         <View style={styles.mainView}>
             <View style={styles.lobbyTopView}>
-
             </View>
             <View style={styles.middleView}>
                 <View style={styles.popUpView}>
@@ -127,6 +126,12 @@ const LobbyScreen = (navigation) => {
                                 <Text style={styles.popUpOptionLobby}>Commencer</Text>
                             </TouchableOpacity>
                         </View>
+                        <Button
+                            style={styles.buttonRegisterLogin}
+                            color="#FE654F"
+                            title="Retour"
+                            onPress={() => console.log(getTeam)}
+                        />
 
                     </View>
                 </View>
