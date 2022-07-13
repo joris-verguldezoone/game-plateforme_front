@@ -40,8 +40,9 @@ const CreateLobbyScreen = (navigation) => {
     //     console.log(profil_picture)
     // }
     return (
-        <View style={{ flex: 1, flexDirection: 'column', alignContent: 'center', justifyContent: 'center', width: '75%' }}>
-            <View style={styles.container}>
+        <View style={styles.mainView}>
+            <View style={styles.topView}>
+                <Text style={{color:"black", fontSize:28}}>Selectionnez un jeu:</Text>
                 <Picker
                     selectedValue={selectedValue}
                     style={{ height: 50, width: 150 }}
@@ -51,11 +52,17 @@ const CreateLobbyScreen = (navigation) => {
                     {(myData) && myData.map(r => <Picker.Item label={r.nom} value={r.id} key={r.id} />)}
 
                 </Picker>
-
             </View>
 
-            <View>
-                <GameRuleComponent selectedValue={selectedValue} />
+            <View style={styles.middleView}>
+                <View style={styles.popUpView}>
+
+                    <GameRuleComponent selectedValue={selectedValue} />
+                </View>
+            </View>
+
+            <View style={styles.bottomView}>
+
             </View>
         </View>
     );

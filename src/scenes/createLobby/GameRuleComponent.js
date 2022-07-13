@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import { Text, View, Image, Input, ScrollView, Button, Picker } from 'react-native';
 import { getAllGames, getOneGameRule, createLobby } from '../../services/CreateLobbyServices';
 import { useFocusEffect } from '@react-navigation/native';
-
+import RadioButton from '../../component/molecules/radioButtons.js'
 
 const GameRuleComponent = (props) => {
     const [gameRule, setGameRule] = useState({});
@@ -41,21 +41,43 @@ const GameRuleComponent = (props) => {
         console.log("return", result)
     }
 
+    const [isLiked, setIsLiked] = useState([
+        { id: 1, value: true, name: "Yes", selected: false },
+        { id: 2, value: false, name: "No", selected: false }
+    ]); // AJOUTÉ POUR LES BOUTONS RADIOS // SHUN
+    
+    const onRadioBtnClick = (item) => {
+        let updatedState = isLiked.map((isLikedItem) =>
+            isLikedItem.id === item.id ? { ...isLikedItem, selected: true } : { ...isLikedItem, selected: false }
+        ); // Operateur Ternaire
+    setIsLiked(updatedState);
+    }; // AJOUTÉ POUR LES BOUTONS RADIOS // SHUN
+
     if (gameRule.hasOwnProperty('reglesjeux')) {
 
         return (
             <View>
-                <Text>coucou</Text>
-                <Text>Type de carte : {gameRule.nom}</Text>
+                <Text style={styles.popUpTextCenter}>coucou</Text>
+                <Text style={styles.popUpText}>Type de carte : {gameRule.nom}</Text>
                 {gameRule.hasOwnProperty('reglesjeux') && gameRule.reglesjeux.map((res, i) => <>
 
                     <View style={{ backgroundColor: 'green' }}>
-                        <Text>id: {res.id}</Text>
+                        <Text style={styles.popUpTextSimple}>id: {res.id}</Text>
                         <Text>Nombre de joueur minimum: {res.nbjoueurmin}</Text>
                         <Text>Nombre de joueur maximum: {res.nbjoueurmax}</Text>
                         <Text>Regle: {res.nomregle}</Text>
                         <Text>Description: {res.regle}</Text>
-
+                        <View style={{}}>
+                            {isLiked.map((item) => (
+                                <RadioButton
+                                onPress={() => onRadioBtnClick(item)}
+                                selected={item.selected}
+                                key={item.id}
+                                >
+                                {item.name}
+                                </RadioButton>
+                            ))}
+                        </View>
                         <Button
                             title="cccc"
                             accessibilityLabel="Appuyez sur ce bouton pour selectionner une regle"

@@ -3,7 +3,6 @@ import styles from './styles.js';
 import { useFocusEffect } from '@react-navigation/native';
 import axios from "axios"
 import apiUrl from "../const";
-
 import { StatusBar } from 'expo-status-bar';
 import { useState, useEffect } from 'react';
 import { StyleSheet, Text, View, Button, TextInput, ScrollView, TouchableOpacity, Image } from 'react-native';
@@ -16,7 +15,6 @@ const HomeScreen = ({ navigation }) => {
     const [login, setLogin] = useState();
     const [password, setPassword] = useState();
     // faut set un state loading, quand il est validé par loginScreen alors App nous fait switch sur profil par exemple   
-
 
 
     // useFocusEffect(
@@ -61,7 +59,6 @@ const HomeScreen = ({ navigation }) => {
             <View style={styles.middleView}>
                 <Text style={styles.textTitle}>Bienvenue sur CBGames !</Text>
                 <View style={styles.popUpView}>
-                    
                     <Text style={styles.popUpTextStart}>Rejoignez-nous:</Text>
 
                     <Button
@@ -89,26 +86,16 @@ const HomeScreen = ({ navigation }) => {
                         color="#6CA054"
                         accessibilityLabel="Appuyez sur ce bouton pour être redirigé vers la page de inscription"
                     />
-                    
-                    
+
                 </View>
             </View>
             <View style={{flex:2, alignItems: 'center', justifyContent: 'center'}}>
-
-            </View>
-        </View>
-    );
-}
-
-export default HomeScreen;
-
-{/* <Button
+                    <Button
                         style={styles.buttonRegisterLogin}
                         onPress={() => navigation.navigate('Menu')}
                         title="Menu des jeux"
                         accessibilityLabel="Appuyez sur ce bouton pour être redirigé vers la page de inscription"
-                    /> */}
-                    {/*
+                    />
                     <Button
                         style={styles.buttonRegisterLogin}
                         onPress={() => navigation.navigate('ProfilScreen', { currentUser: currentUser, accessToken: accessToken })}
@@ -127,4 +114,11 @@ export default HomeScreen;
                         title="Créer un nouveau lobby"
                         accessibilityLabel="Appuyez sur ce bouton pour être redirigé vers la page de création de partie"
                     />
-                    */}
+            </View>
+        </View>
+    );
+}
+
+export default HomeScreen;
+
+                    

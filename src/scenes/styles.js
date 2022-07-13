@@ -1,3 +1,4 @@
+import { WHEN_UNLOCKED_THIS_DEVICE_ONLY } from 'expo-secure-store';
 import { StyleSheet } from 'react-native';
 const styles = StyleSheet.create({
 
@@ -60,9 +61,17 @@ const styles = StyleSheet.create({
         color: '#DFE2DF',fontSize:20, paddingBottom:15, fontWeight: 'bold',
     },
 
+    popUpLobbyRegles: {
+        color: '#DFE2DF',fontSize:20, paddingBottom:15, fontWeight: 'bold', textAlign:'center', paddingTop:15,
+    },
+
     popUpText: {
-        color: '#DFE2DF',fontSize:20, fontWeight: 'bold',
-    },  
+        color: '#DFE2DF',fontSize:20, fontWeight: 'bold', padding:5,
+    },
+
+    popUpTextCenter: {
+        color: '#DFE2DF',fontSize:20, fontWeight: 'bold', padding:2.5, textAlign:"center",
+    },
 
     popUpOption: {
         color: '#DFE2DF',fontSize:12, padding:10, textAlign:'center'
@@ -71,6 +80,50 @@ const styles = StyleSheet.create({
     popUpTextInput: {
         borderWidth:2, backgroundColor:'#DFE2DF', borderColor:"#AAAAAA", marginTop:10, marginBottom:10, fontSize:20, borderRadius: 5,
     },
+
+    radioButtonContainer: {
+        flexDirection: "row",
+        alignItems: "center",
+        marginBottom: 5
+    },
+
+    radioButton: {
+        height: 20,
+        width: 20,
+        backgroundColor: "#F8F8F8",
+        borderRadius: 10,
+        borderWidth: 1,
+        borderColor: "#E6E6E6",
+        alignItems: "center",
+        justifyContent: "center"
+    },
+
+    radioButtonIcon: {
+        height: 14,
+        width: 14,
+        borderRadius: 7,
+        backgroundColor: "#98CFB6"
+    },
+    
+    radioButtonText: {
+        fontSize: 16,
+        marginLeft: 16
+    },
+
+    popUpLobbyTextRegles:
+    {
+        marginBottom:5, color:"white",
+    },
+
+    popUpOptionLobby: 
+    {
+        fontWeight:"bold",
+        textAlign:"center",
+        fontSize:28,
+        color:"white",
+        padding:2.5,
+    },
+
     // container: {
     //     flex: 1,
     //     backgroundColor: '#fff',
@@ -88,20 +141,36 @@ const styles = StyleSheet.create({
     //     borderRadius: 5,
     // },
 
-    // buttonRegisterLogin: {
-    //     paddingTop: 10,
-    // },
+    imageProfil: {
+        borderRadius:50,
+        width:100,
+        height:100,
+        marginBottom:10,
+    },
 
-    // LineLobby: {
-    //     flex:1,
-    //     flexDirection:'row',
-    //     alignContent: 'flex-start',
-    //     justifyContent: 'center',
-    //     backgroundColor:'white',
-    //     maxHeight:20,
-    //     width:300,
-    //     margin:10,
-    // },
+    imageProfilLobby: {
+        borderRadius:50,
+        width:30,
+        height:30,
+        marginBottom:10,
+    },
+
+    buttonRegisterLogin: {
+        margin: 10,
+    },
+
+    LineLobby: {
+        padding:10,
+    },
+
+    lobbyTopView: {
+        flex:0.5,
+    },
+
+    popUpTextSimple: {
+        fontSize:14,
+        color:"white",
+    },
 
     // ViewLobby1: {
     //     flex: 2,

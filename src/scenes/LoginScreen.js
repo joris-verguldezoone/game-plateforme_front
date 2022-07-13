@@ -94,6 +94,7 @@ const LoginScreen = ({ navigation, route }) => {
               <Button 
               title="Se Connecter"
               color="#6CA054"
+              onPress={() => navigation.navigate('LobbyScreen', { currentUser: currentUser, accessToken: accessToken })}
               />
             </View>
           </View>
