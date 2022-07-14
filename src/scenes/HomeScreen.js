@@ -13,14 +13,14 @@ import { socketIo } from './socketContext'
 const HomeScreen = ({ navigation }) => {
     // localStorage.clear();
     const [accessToken, setAccessToken] = useState('');
-    // const [currentUser, setCurrentUser] = useState({
-    //     "exp": 1757568992,
-    //     "idavatar": 0,
-    //     "role": 0,
-    //     "id": 38,
-    //     "username": "cc",
-    // });
-    const [currentUser, setCurrentUser] = useState({});
+    const [currentUser, setCurrentUser] = useState({
+        "exp": 1757568992,
+        "idavatar": 0,
+        "role": 0,
+        "id": 38,
+        "username": "cc",
+    });
+    // const [currentUser, setCurrentUser] = useState({});
 
     const [login, setLogin] = useState();
     const [password, setPassword] = useState();
@@ -46,7 +46,7 @@ const HomeScreen = ({ navigation }) => {
 
 
             }
-            fetchPayload()
+            // fetchPayload()
 
             return () => {
                 // socket.disconnect();
@@ -113,7 +113,7 @@ const HomeScreen = ({ navigation }) => {
             />
             <Button
                 style={styles.buttonRegisterLogin}
-                onPress={() => navigation.navigate('Inscription')}
+                onPress={() => navigation.navigate('RegisterScreen')}
                 title="Inscription"
                 accessibilityLabel="Appuyez sur ce bouton pour être redirigé vers la page de inscription"
             />
@@ -159,3 +159,26 @@ const HomeScreen = ({ navigation }) => {
 }
 
 export default HomeScreen;
+
+{/* <Button
+                        style={styles.buttonRegisterLogin}
+                        title="Connexion"
+                        color="#3F9B33"
+                        accessibilityLabel="Appuyez sur ce bouton pour être redirigé vers la page de connexion"
+                        onPress={() => {
+                            navigation.navigate('Connexion'), { name: "monChibre" }
+                        }
+                        }
+                    /> */}
+{/* <Button
+                        style={styles.buttonRegisterLogin}
+                        title="Inscription"
+                        color="#3F9B33"
+                        accessibilityLabel="Appuyez sur ce bouton pour être redirigé vers la page de inscription"
+                        onPress={() => navigation.navigate('Inscription')}
+                    /> */}
+{/* <View style={{flex: 1, justifyContent:'center',alignItems:'center', borderTopWidth:1,borderTopColor:'gray',marginTop:30}}>
+                        <Text style={styles.smTitle}>Développé par:</Text>
+                        <Text style={styles.smTitle}>Joris V., Mathis C., Marwanne B., Shun L.</Text>
+                        <Text style={styles.smTitle}>@LaPlateforme_</Text>
+                    </View> */}

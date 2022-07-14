@@ -14,7 +14,7 @@ const ProfilScreen = ({ navigation, accessToken, currentUser, route }) => {
 
     console.log('currentUser + accessToken')
 
-    // const handleSubmit = () => {
+    // const handleSubmit = () => { // ne pas utiliser la route /profil elle est attribué au token, utiliser les autre route de user 
     //     console.log(usernameInput)
     //     profile(user.id, usernameInput)
 
@@ -44,7 +44,7 @@ const ProfilScreen = ({ navigation, accessToken, currentUser, route }) => {
                     style={styles.buttonRegisterLogin}
                     title="Changer"
                     accessibilityLabel="Appuyez sur ce bouton pour changer d'identifiant"
-                    onPress={handleSubmit}
+                // onPress={handleSubmit}
                 />
             </View>
             <View>

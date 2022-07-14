@@ -26,7 +26,24 @@ export default function App() {
   return (
     <>
       <NavigationContainer>
-        <Stack.Navigator>
+        <Stack.Navigator screenOptions={{
+          headerStyle: {
+            backgroundColor: '#0458af',
+            borderBottomWidth: 0,
+            padding: 0,
+            shadowColor: "#0458af",
+            shadowOpacity: 100,
+            shadowRadius: 20,
+            shadowOffset: {
+              height: 0,
+              width: 0,
+            }
+          },
+          headerTintColor: 'white',
+          headerTitleStyle: {
+            fontWeight: 'bold',
+          },
+        }}>
           <Stack.Screen name="HomeScreen" component={HomeScreen} options={{ title: "Accueil" }} />
           <Stack.Screen name="RegisterScreen" component={RegisterScreen} options={{ title: 'Register' }} />
           <Stack.Screen name="LoginScreen" component={LoginScreen} options={{ title: 'Connexion' }} />
@@ -39,6 +56,12 @@ export default function App() {
     </>
   );
 }
+{/* props contient déjà la navigation */ }
+{/* {(props) => <HomeScreen {...props} />} */ }
+{/* On navigue ves le stackScreen et son name */ }
+{/* <Stack.Screen name="Profil" component={ProfilScreen} options={{ title: 'Profil' }} /> */ }
+{/* <Stack.Screen name="Menu" component={MainScreen} options={{ title: 'Menu' }} /> */ }
+{/* <Stack.Screen name="InfoJeu" component={GameInfoScreen} options={{ title: 'Info Jeu' }} /> */ }
 
 
 

@@ -1,3 +1,13 @@
+import * as React from 'react';
+import styles from './styles.js';
+import { useFocusEffect } from '@react-navigation/native';
+import axios from "axios"
+import apiUrl from "../const";
+
+import { StatusBar } from 'expo-status-bar';
+import { useState, useEffect } from 'react';
+import { StyleSheet, Text, View, Button, TextInput, ScrollView, TouchableOpacity } from 'react-native';
+
 const RegisterScreen = () => {
 
     const [username, setUsername] = useState('');
@@ -40,7 +50,7 @@ const RegisterScreen = () => {
 
 export { RegisterScreen }
 
-const Register = (username, password, confPassword) => {
+const Register = (username, password, confPassword) => { // refacto dans les services
     // set state ici qui sera récupéré apres la requete axios 
     if (password == confPassword) {
         console.log(password);
@@ -62,7 +72,7 @@ const Register = (username, password, confPassword) => {
             });
     }
     else {
-        return "Confirmation du mot de passe incorrect"
+        return <Text>"Confirmation du mot de passe incorrect"</Text>
     }
 }
 export default Register
