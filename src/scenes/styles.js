@@ -39,16 +39,16 @@ const styles = StyleSheet.create({
     },
 
     middleView: {
-        flex: 5, alignItems: 'center', justifyContent: 'start',
+        // flex: 5, alignItems: 'center', justifyContent: 'start',      // créer une erreur
     },
 
     bottomView: {
         flex: 2, alignItems: 'center', justifyContent: 'center',
     },
 
-    textTitle: {
-        fontSize: 30, padding: 20, paddingTop: 50, paddingBottom: 20, shadowOffset: 2, textAlign: 'center'
-    },
+    // textTitle: {
+    //     fontSize: 30, padding: 20, paddingTop: 50, paddingBottom: 20, shadowOffset: 2, textAlign: 'center' // créer une erreur
+    // },
 
     popUpView: {
         backgroundColor: '#3F403F', alignItems: 'center', justifyContent: 'center', borderColor: '#AAAAAA', borderWidth: 1, borderRadius: 5, padding: 20, shadowRadius: 10, shadowOffset: { width: 0, height: 5 }, shadowColor: '#AAAAAA',

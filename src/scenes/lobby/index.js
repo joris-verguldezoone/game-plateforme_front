@@ -31,14 +31,18 @@ const AllPlayerSlot = (props) => {
         console.log(props.playerInLobby, "in AllplayerSlot function component")
 
         slots.push(<View key={"view_slot_" + i}>
-            <Text key={"img_" + i + "_team"} style={styles.ImagePlayerLobby}>{props.playerInLobby[i].username}</Text>
-            <Text key={"username_" + i + "_team"} style={styles.TextPlayerLobby}></Text>
-            <Button
-                key={"join_" + i + "_team"}
-                onPress={() => props.joinTeam(i)}
-                title={"join team " + (i + 1)}
-                color="#841584"
-                accessibilityLabel="Join a team" />
+            <View style={{ margin: "5px" }}>
+                <Text key={"img_" + i + "_team"} style={styles.ImagePlayerLobby}>{props.playerInLobby[i].username}</Text>
+                <Text key={"username_" + i + "_team"} style={styles.TextPlayerLobby}></Text>
+            </View>
+            {!props.playerInLobby[i].hasOwnProperty('id') &&
+                <Button
+                    key={"join_" + i + "_team"}
+                    onPress={() => props.joinTeam(i)}
+                    title={"join team " + (i + 1)}
+                    color="#841584"
+                    accessibilityLabel="Join a team" />
+            }
         </View>
         )
         console.log(slots, 'SLOTS in for')
@@ -358,117 +362,13 @@ const LobbyScreen = (navigation) => {
 
     return (
         <>
-
+            {/* 
             <View style={{ flex: 1, flexDirection: 'row', alignContent: 'flex-start', justifyContent: 'center' }}>
-                <View style={styles.ViewLobby1}>
-
-                    {/* {(nomLobby.length > 0) && <Text>Nom du lobby: {nomLobby}</Text>} */}
-
-                    {/* {(lobbyInfo) && console.log(lobbyInfo, 'indiiiiii')}
-
-
-
-                    {(lobbyInfo.length > 0) && Array.from(lobbyInfo).forEach(r =>
-                        <><Text>joueurs minimum Array.from foreach : {r}</Text></>)}
-
-                    {(lobbyInfo.length > 0) && console.log(lobbyInfo, 'lobby_info_console.log')} */}
-                    {/* {(lobbyInfo.length > 0) && console.log(" test okeyyy ", lobbyInfo)} */}
-                    {/* {(lobbyInfo.length > 0) && console.log(" test coucou ", lobbyInfo.id)} */}
-
-                    {(Object.keys(lobbyInfo).length != 0 && lobbyInfo[0] != undefined) &&
-                        <View>
-                            {console.log(Object.keys(lobbyInfo).length, 'TARRRRAAAACEEEEE')}
-                            {console.log(lobbyInfo)}
-                            <Text>
-                                id : {lobbyInfo[0].id}
-                            </Text>
-                            <Text>
-                                nom lobby:  {lobbyInfo[0].nomLobby}
-                            </Text>
-                        </View>}
-                    {/* {(playerInLobby.length > 0 && console.log(playerInLobby, 'yooooooo'))} */}
-                    {/* {(lobbyInfo.length > 0) && console.log(lobbyInfo.nbMax, ' lobbyInfo.nbMax')} */}
-                    {/* {(lobbyInfo.length > 0) && console.log(typeof (lobbyInfo.nbMax), ' lobbyInfo.nbMax typeof')} */}
-                    {/* {(playerInLobby.length > 0) && AllPlayerSlot(lobbyInfo.nbMax)} */}
-                    {/* {(Object.keys(lobbyInfo).length != 0) &&
-                        // AllPlayerSlot(lobbyInfo.nbMax)
-                        (() => {
-                            for (var i = 1; i <= lobbyInfo.nbMax; i++) {
-                                // trouver un id a mettre
-                                // appeler joinTeam
-                                // stocker les slots valide ou pas 
-                                // mettre son payload dans la team et envoyer un evenement socket , state relié a ce meme evenement pour connaitre 
-                                // le placement des autre joueurs playerInLobby
-
-                                console.log(playerInLobby, "in AllplayerSlot")
-
-                                return <View key={'lobby_slot' + i} style={styles.LineLobby}>
-                                    <Image styles={styles.ImagePlayerLobby} />
-                                    <Text style={styles.ImagePlayerLobby}></Text>
-                                    <Text style={styles.TextPlayerLobby}>{userName}</Text>
-                                    <Button
-                                        onPress={joinTeam(i)}
-                                        title="join"
-                                        color="#841584"
-                                        accessibilityLabel="Join a team" />
-                                    <TouchableOpacity
-                                        style={styles.button}
-                                        onPress={() => console.log(getTeam)}
-                                    >
-                                        <Text>Equipe: {getTeam}</Text>
-                                    </TouchableOpacity>
-                                </View>
-                            }
-                        })
-                    } */}
-                    {(Object.keys(lobbyInfo).length != 0 && lobbyInfo[0] != undefined && playerInLobby.length > 0) &&
-                        <View>
-                            {console.log(playerInLobby, 'playerInLobby cccoco')}
-                            <AllPlayerSlot setPlayerInLobby={setPlayerInLobby} joinTeam={joinTeam}
-                                playerInLobby={playerInLobby} currentUser={currentUser} lobbyInfo={lobbyInfo[0]} ></AllPlayerSlot>
-                        </View>
-                    }
-
-
-                    {/* // <AllPlayerSlot nbMax={lobbyInfo.nbMax} />} */}
-
-                    {/* {(lobbyInfo.length > 0) && (console.log(lobbyInfo, 'COMMENT.??')) && lobbyInfo.map(element => {
-                    
-                        <>joueurs minimum foreach   : {element} test {element.id}</>
-                    })} */}
-                    {/* {(lobbyInfo) && lobbyInfo.map(element => {
-
-                        <><Text>joueurs map minimum foreach   : {element}</Text></>
-                    })}  */}
-
-
-
-
-
-                </View>
-                <View style={styles.ViewLobby2}>
-                    <Image style={styles.ImageLobby} />
-                    <Text style={styles.ImageLobby}>IMAGE REGLES</Text>
-                    <TouchableOpacity
-                        style={styles.button}
-                    // onPress={() => console.log(getTeam)}
-                    >
-                        <Text style={styles.TextButtonLobby}>Prêt</Text>
-                    </TouchableOpacity>
-                    <View style={styles.ViewOptionsLobby}>
-                        <TouchableOpacity style={styles.ButtonOptionLobby1}>
-                            <Text style={styles.TextButtonLobby}>Option</Text>
-                        </TouchableOpacity>
-                        <TouchableOpacity style={styles.ButtonOptionLobby2}>
-                            <Text style={styles.TextButtonLobby}>Commencer</Text>
-                        </TouchableOpacity>
-                    </View>
-                </View>
-            </View>
+                 */}
 
             <View style={styles.mainView}>
-                <View style={styles.lobbyTopView}>
-                </View>
+                {/* <View style={styles.lobbyTopView}>
+                </View> */}
                 <View style={styles.middleView}>
                     <View style={styles.popUpView}>
 
@@ -476,64 +376,69 @@ const LobbyScreen = (navigation) => {
                         <View style={styles.popUpLobbyPart1}>
 
 
-                            <Text style={styles.popUpText}>Lobby de ******</Text>
+                            {/* <View>
+                            
+                            <Text>
+                                id : {lobbyInfo[0].id}
+                            </Text>
+                            <Text>
+                                nom lobby:  
+                            </Text> */}
+                            {/* </View>} */}
+                            {console.log(lobbyInfo, 'icicici')}
+
+                            {(Object.keys(lobbyInfo).length != 0 && lobbyInfo[0] != undefined) && // le createur de la partie c un peu plus compliqué a faire figurer pcq ça passe par les socket
+                                <Text style={styles.popUpText}>{lobbyInfo[0].idjeux.nom} : {lobbyInfo[0].nomLobby}</Text>
+                            }
                             <ScrollView style={{ width: 300, backgroundColor: "#DFE2DF", borderRadius: 5, marginTop: 5, }}>
-                                <View style={styles.LineLobby}>
-                                    <Image styles={styles.imagePlayerLobby}
-                                    // source={require('./assets/favicon.png')} ICI JE LAISSE, C'EST L'EMPLACEMENT POUR LA PHOTO, RECUPERER PROPS TEXT EN DESSOUS profil_picture    
-                                    />
-                                    <Text style={styles.ImagePlayerLobby}>{profil_picture}</Text>
-                                    <Text style={styles.TextPlayerLobby}>{userName}</Text>
-                                    <TouchableOpacity
-                                        style={styles.button}
-                                        onPress={() => console.log(getTeam)}
-                                    >
-                                        <Text>Equipe: {getTeam}</Text>
-                                    </TouchableOpacity>
-                                    <Button
-                                        style={styles.buttonRegisterLogin}
-                                        onPress={joinTeam}
-                                        title="Rejoindre"
-                                        color="#6CA054"
-                                        accessibilityLabel="Join a team"
-                                    />
-                                </View>
-
-                                <View style={styles.LineLobby}>
-                                    <Image styles={styles.ImagePlayerLobby} />
-                                    <Text style={styles.TextPlayerLobby}>Shun</Text>
-                                    <TouchableOpacity
-                                        style={styles.button}
-                                        onPress={() => console.log(getTeam)}
-                                    >
-                                        <Text>Equipe: {getTeam}</Text>
-                                    </TouchableOpacity>
-                                </View>
-
-                                <View style={styles.LineLobby}>
-                                    <Image styles={styles.ImagePlayerLobby} />
-                                    <Text style={styles.TextPlayerLobby}>Shun</Text>
-                                    <TouchableOpacity
-                                        style={styles.button}
-                                        onPress={() => console.log(getTeam)}
-                                    >
-                                        <Text>Equipe: {getTeam}</Text>
-                                    </TouchableOpacity>
-                                </View>
+                                {(Object.keys(lobbyInfo).length != 0 && lobbyInfo[0] != undefined && playerInLobby.length > 0) &&
+                                    <View>
+                                        {console.log(playerInLobby, 'playerInLobby cccoco')}
+                                        <AllPlayerSlot setPlayerInLobby={setPlayerInLobby} joinTeam={joinTeam}
+                                            playerInLobby={playerInLobby} currentUser={currentUser} lobbyInfo={lobbyInfo[0]} ></AllPlayerSlot>
+                                    </View>
+                                }
                             </ScrollView>
 
                         </View>
 
-                        <View style={styles.popUpLobbyPart2}>
-                            <Image style={styles.ImageLobby}
-                            // source={require('./assets/favicon.png')} JE N'ARRIVE TOUJOURS PAS A METTRE DES IMAGES HEEEEEEEEEEELP #SHUN
-                            />
-                            <Text style={styles.popUpLobbyRegles}>REGLES</Text>
-                            <Image
-                                style={styles}
-                                source={require('../testimageRegle.png')}
-                            />
-                            <Text style={styles.popUpLobbyTextRegles}>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam quis tincidunt erat, non porta orci. Aliquam mattis ut tortor a posuere. Maecenas facilisis augue ipsum, eu semper mauris malesuada sit amet. Vestibulum sed sodales mauris, non placerat orci. Vestibulum mollis diam fermentum sapien auctor eleifend. Sed porttitor libero metus. Sed nulla mi, pulvinar vel congue eget, ullamcorper ut erat. Pellentesque.  </Text>
+                        {/* <View style={styles.popUpLobbyPart2}>
+                            <View>
+                                <Image style={styles.ImageLobby}
+                                // source={require('./assets/favicon.png')} JE N'ARRIVE TOUJOURS PAS A METTRE DES IMAGES HEEEEEEEEEEELP #SHUN
+                                />
+                                <Text style={styles.popUpLobbyRegles}>REGLES</Text>
+                                <Image
+                                    style={styles}
+                                    source={require('../testimageRegle.png')}
+                                />
+                                {(Object.keys(lobbyInfo).length != 0 && lobbyInfo[0] != undefined) &&
+                                    <>
+                                        <Text style={styles.popUpLobbyTextRegles}>Nom : {lobbyInfo[0].idregle.nomregle}  </Text>
+                                        <Text style={styles.popUpLobbyTextRegles}>Description : {lobbyInfo[0].idregle.regle}  </Text>
+                                        <Text style={styles.popUpLobbyTextRegles}>nombre de jeux max : {lobbyInfo[0].idregle.nbjoueurmax}  </Text>
+                                        <Text style={styles.popUpLobbyTextRegles}>nombre de jeux min : {lobbyInfo[0].idregle.nbjoueurmin}  </Text>
+                                    </>
+                                }
+
+                            </View>
+                            <View style={styles.popUpLobbyPart2}>
+                                <Image style={styles.ImageLobby}
+                                // source={require('./assets/favicon.png')} JE N'ARRIVE TOUJOURS PAS A METTRE DES IMAGES HEEEEEEEEEEELP #SHUN
+                                />
+                                <Text style={styles.popUpLobbyRegles}>DIFFICULTE</Text>
+                                <Image
+                                    style={styles}
+                                    source={require('../testimageRegle.png')}
+                                />
+                                {(Object.keys(lobbyInfo).length != 0 && lobbyInfo[0] != undefined) &&
+                                    <>
+                                        <Text style={styles.popUpLobbyTextRegles}>Nom : {lobbyInfo[0].iddifficulte.difficulte}  </Text>
+                                        <Text style={styles.popUpLobbyTextRegles}>Multiplicateur de score : {lobbyInfo[0].iddifficulte.multiplicateurscore}  </Text>
+                                    </>
+                                }
+                            </View>
+
 
                             <Button
                                 style={styles.buttonRegisterLogin}
@@ -556,7 +461,8 @@ const LobbyScreen = (navigation) => {
                                 onPress={() => console.log(getTeam)}
                             />
 
-                        </View>
+                        </View> */}
+
                     </View>
 
                 </View>

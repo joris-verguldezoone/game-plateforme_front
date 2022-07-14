@@ -9,6 +9,12 @@ import { io } from "socket.io-client";
 import { SOCKET_URL } from '../../const';
 import RadioButton from '../../component/molecules/radioButtons.js'
 
+
+// Pour que ça marche sur tel il faut wraper tout ce qui sert a render le contenu, notamment toutes les fonction qui touche radioButton dans un composant externe
+// ainsi on pourra utiliser un useEffect pour limiter les perte de state : regle lorsque l'on utilise un radio button
+// y'aurait plus qu'a render un nouveau component LobbyContent qui posséderait des props et serait indépendant au niveau du render de celui-ci
+// séparer les composant qui fetch avec ceux qui render 
+
 const GameRuleComponent = (props) => {
     const [gameRule, setGameRule] = useState({});
     const [difficulte, setDifficulte] = useState(0);
@@ -30,14 +36,15 @@ const GameRuleComponent = (props) => {
     // );
 
 
-    const onRadioBtnClick = (item) => { // item est a la fois l'index du table du state radioButton && l'id selected , voir constructRadioButton pour l'initialisation
+    const onRadioBtnClick = (item) => {
         console.log(radioGameRule, "radioGameRule")
         let updatedState = radioGameRule.map((radioElement) =>
             radioElement.id === item ? { ...radioElement, selected: true } : { ...radioElement, selected: false }
 
         ); // Operateur Ternaire
         console.log(updatedState, 'updatedState');
-        setRadioGameRule(updatedState);
+        setRadioGameRule(updatedState)
+        // return updatedState; // futur mission pour limiter les render , a voir pour un useEffect
         console.log(item, 'item')
     }; // AJOUTÉ POUR LES BOUTONS RADIOS // SHUN
 
@@ -74,17 +81,20 @@ const GameRuleComponent = (props) => {
         if (props.selectedValue != 0) {
             // console.log(props.selectedValue + "in the if")
 
-            getOneGameRule(props.selectedValue).then(response => {
-                console.log(response, 'gamerule response')
-                if (stop)
+            if (stop)
+                getOneGameRule(props.selectedValue).then(response => {
+                    console.log(response, 'gamerule response')
                     constructRadioButton(response)
 
-            })
+                })
+
         }
         return () => {
             stop = false
         }
     }, [props.selectedValue])
+
+
 
     const handleDifficulte = (event) => { // a refacto avec des comparateur pour rendre générique
         console.log('HandleDifficulte', event)
@@ -140,7 +150,12 @@ const GameRuleComponent = (props) => {
                             <View style={{}}>
                                 <RadioButton
                                     onPress={() => { onRadioBtnClick(res.buttonRadio.id), handleRegle(res), handleDifficulte(res.iddifficulte2.id) }}
-                                    selected={radioGameRule[res.buttonRadio.id - 1].selected}
+
+                                    selected={() => {
+
+                                        console.log(res.buttonRadio.id, "pk tu bug enculé")
+                                        radioGameRule[res.buttonRadio.id - 1].selected
+                                    }}
                                     key={'cc'}
                                 >
                                 </RadioButton>
@@ -148,21 +163,21 @@ const GameRuleComponent = (props) => {
 
                         </View></>
                     )}
-                </ScrollView>
 
-                <TextInput
-                    style={styles.inputRegisterLogin}
-                    placeholder="Nom Lobby"
-                    // autoComplete="password"
-                    name="nomLobby"
-                    // value={user.password}
-                    onChangeText={e => setNomLobby(e)}
-                />
-                <Button
-                    title="Créer le lobby"
-                    accessibilityLabel="Appuyez sur ce bouton pour créer un lobby"
-                    onPress={submitLobby}
-                />
+                    <TextInput
+                        style={styles.inputRegisterLogin}
+                        placeholder="Nom Lobby"
+                        // autoComplete="password"
+                        name="nomLobby"
+                        // value={user.password}
+                        onChangeText={e => setNomLobby(e)}
+                    />
+                    <Button
+                        title="Créer le lobby"
+                        accessibilityLabel="Appuyez sur ce bouton pour créer un lobby"
+                        onPress={submitLobby}
+                    />
+                </ScrollView>
             </View>
         );
     }

@@ -104,13 +104,13 @@ const CreateLobbyScreen = (navigation, props,) => {
 
                 </View>
 
-                <View style={styles.middleView}>
-                    <View style={styles.popUpView}>
-                        <GameRuleComponent socket={navigation.route.params.socket} currentUser={navigation.route.params.currentUser} selectedValue={selectedValue} navigation={navigation} />
-                        <View style={styles.bottomView}>
+                {/* <View style={styles.middleView}>    // revoir pour la version mobile ça enleve l'affichage du picker
+                    <View style={styles.popUpView}> */}
+                <GameRuleComponent socket={navigation.route.params.socket} currentUser={navigation.route.params.currentUser} selectedValue={selectedValue} navigation={navigation} />
+                <View style={styles.bottomView}>
 
-                        </View>
-                    </View>
+                    {/* </View>
+                    </View> */}
                 </View>
             </View>
         </>
