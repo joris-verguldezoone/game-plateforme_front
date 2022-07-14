@@ -13,7 +13,14 @@ import { socketIo } from './socketContext'
 const HomeScreen = ({ navigation }) => {
     // localStorage.clear();
     const [accessToken, setAccessToken] = useState('');
-    const [currentUser, setCurrentUser] = useState('');
+    // const [currentUser, setCurrentUser] = useState({
+    //     "exp": 1757568992,
+    //     "idavatar": 0,
+    //     "role": 0,
+    //     "id": 38,
+    //     "username": "cc",
+    // });
+    const [currentUser, setCurrentUser] = useState({});
 
     const [login, setLogin] = useState();
     const [password, setPassword] = useState();
@@ -24,7 +31,7 @@ const HomeScreen = ({ navigation }) => {
     useFocusEffect(
         React.useCallback(() => {
             console.log(navigation.route, "navigation.route")
-            const fetchData = async () => {
+            const fetchPayload = async () => {
                 const payload = await useToken().then((response) => {
                     // console.log(response, ' in use effect')
                     setCurrentUser({
@@ -39,7 +46,7 @@ const HomeScreen = ({ navigation }) => {
 
 
             }
-            fetchData()
+            fetchPayload()
 
             return () => {
                 // socket.disconnect();
@@ -57,17 +64,19 @@ const HomeScreen = ({ navigation }) => {
 
             console.log('in App useEffect')
             console.log(socket)
+            console.log(currentUser)
             if (socket != null) {
                 // if (socket.connected == false)
                 // socket.connect()
 
                 socket.on("FromAPI", data => {
-                    // if (isSocketSubscribed) {
+                    if (isSocketSubscribed) {
 
-                    console.log(data, 'FromAPI')
-                    console.log("coucou")
-                    // }
+                        console.log(data, 'FromAPI')
+                        console.log("HomeScreen")
+                    }
                 });
+
             }
             if (socket != null) {
                 // console.log('disconnect')

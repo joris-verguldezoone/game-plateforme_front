@@ -87,9 +87,9 @@ const LobbyList = (navigation) => {
 
                 socket.on("lobby_join_200", data => {
                     if (isSocketSubscribed) {
-
+                        console.log("currentUser: navigation.route.params.currentUser: ", navigation.route.params.currentUser)
                         console.log(data, 'lobby')
-                        navigation.navigation.navigate('LobbyScreen', { nomLobby: nomLobby, socket: socket })
+                        navigation.navigation.navigate('LobbyScreen', { nomLobby: nomLobby, socket: socket, nbMax: data, currentUser: navigation.route.params.currentUser })
                     }
                 });
             }

@@ -30,17 +30,16 @@ const AllPlayerSlot = (props) => {
         // {props.playerInLobby[i]} .username?
         console.log(props.playerInLobby, "in AllplayerSlot function component")
 
-        slots.push(<>
-            <Text key={"img_" + i + "_team"} style={styles.ImagePlayerLobby}>eeetooo{i}iii </Text>
-            <Text key={"username_" + i + "_team"} style={styles.TextPlayerLobby}>goootooo</Text>
+        slots.push(<View key={"view_slot_" + i}>
+            <Text key={"img_" + i + "_team"} style={styles.ImagePlayerLobby}>{props.playerInLobby[i].username}</Text>
+            <Text key={"username_" + i + "_team"} style={styles.TextPlayerLobby}></Text>
             <Button
                 key={"join_" + i + "_team"}
                 onPress={() => props.joinTeam(i)}
                 title={"join team " + (i + 1)}
                 color="#841584"
                 accessibilityLabel="Join a team" />
-            {/* <Text>Equipe: {getTeam}</Text> */}
-        </>
+        </View>
         )
         console.log(slots, 'SLOTS in for')
 
@@ -48,14 +47,12 @@ const AllPlayerSlot = (props) => {
     console.log(slots, 'SLOTS outside for')
     return (
         <>
-            <View>
-                {/* {slots} */}
-                {slots.map(element => {
+            {/* {slots} */}
+            {slots.map(element => {
 
-                    console.log(element, 'element of slot')
-                    return element
-                })}
-            </View>
+                console.log(element, 'element of slot')
+                return element
+            })}
         </>
     )
 }
@@ -71,33 +68,22 @@ const LobbyScreen = (navigation) => {
     const [currentUser, setCurrentUser] = useState({})
     const [playerInLobby, setPlayerInLobby] = useState({})
 
-    const getNumberOfPlayer = (nbMaxPlayer) => { // ça v& devenir ce que je recois du .on('slots) 
-        let playerInSlot = []
-        for (let i = 1; i <= nbMaxPlayer; i++) {
-            console.log("gRRRRRRRRRrrrrRrr")
-            playerInSlot.push({})
-        }
-        console.log(playerInSlot, 'PLAYER IN SLOT')
-        console.log(playerInSlot)
+    // const getNumberOfPlayer = (nbMaxPlayer) => { // ça v& devenir ce que je recois du .on('slots) 
+    //     let playerInSlot = []
+    //     for (let i = 1; i <= nbMaxPlayer; i++) {
+    //         console.log("gRRRRRRRRRrrrrRrr")
+    //         playerInSlot.push({})
+    //     }
+    //     console.log(playerInSlot, 'PLAYER IN SLOT')
+    //     console.log(playerInSlot)
 
-        return playerInSlot
+    //     return playerInSlot
 
-    }
-
-    // const socket = React.useContext(SocketContext);
-
-    // const manager = new Manager(SOCKET_URL, {
-    //     autoConnect: false
-    // });
-
-    // const socket = manager.socket("/");
-
-
-
+    // }
 
     useFocusEffect(
         React.useCallback(() => {
-
+            let koko = 0
             let isSocketSubscribed = true;
             console.log('in App useEffect')
             setSocket(navigation.route.params.socket)
@@ -106,94 +92,51 @@ const LobbyScreen = (navigation) => {
             console.log(typeof (currentUser), "currentUser")
             let user = navigation.route.params.currentUser
             setCurrentUser([user])
-
-
-            // console.log(navigation.route.params, "navigation.route.params")
             setNomLobby(navigation.route.params.nomLobby)
 
-            console.log(nomLobby, 'nom lobby')
-            console.log(nomLobby.length, 'len')
-            console.log(navigation.route.params.nbPlayerMax, 'navigation.route.params.nbPlayerMax')
             if (socket != null) {
                 if (isSocketSubscribed) {
                     console.log("emit réussi")
                     socket.emit('join_lobby_validate', [navigation.route.params.nomLobby, navigation.route.params.nbPlayerMax]); // donner nbMax player, puis si c'est déjà set en node ne pas le re set
 
+
+
                 }
 
+                koko = koko + 1
+                console.log(koko, 'KOKO')
+
+
             }
-            if (socket != null) {
-                return () => isSocketSubscribed = false;
-            }
+
+
+
+
+            // if (socket != null) {
+            //     return () => isSocketSubscribed = false;
+            // }
 
         }, [socket])
     );
 
     useEffect(() => {
-        // React.useCallback(() => {
         let isLobbySet = true;
-        console.log("lr :ksertlkjesrkegrlkjj")
-        // console.log(navigation.route.params, "navigation.route.params")
         const fetchData = async () => {
 
             const result = await getLobbyInfo(navigation.route.params.nomLobby)
-            console.log(typeof (result), 'typeof')
-            console.log(typeof (result[0]), 'typeof')
-            console.log(result[0], 'result[0]')
-            setLobbyInfo([result[0]])
-            console.log(result, 'fetchData Result useEffect')
-            console.log([result[0]], 'jrage tarpin')
 
-            console.log(result[0].nbMax, "result[0].nbMax")
+            setLobbyInfo([result[0]])
+            console.log(result, "????")
         }
-        console.log(lobbyInfo, 'lobby info useEffect')
-        console.log(isLobbySet, '????')
         console.log(lobbyInfo, 'lobby info')
-        // if (Object.keys(lobbyInfo).length != 0) {
-        console.log(isLobbySet, '????2')
         if (isLobbySet) {
             fetchData()
-            console.log(lobbyInfo, 'after fetchData')
-
         }
-        // 
-        if (Object.keys(lobbyInfo).length != 0) {
-            console.log(lobbyInfo, 'in return')
-            console.log(playerInLobby, 'playerInLobby  return ')
-
+        if (Object.keys(lobbyInfo).length != 0 && lobbyInfo[0] != undefined) {
             return () => isLobbySet = false;
         }
 
     }, [])
-
-
-    useEffect(() => {
-        // React.useCallback(() => {
-        let arePlayerSet = true;
-        if (arePlayerSet) {
-            if (Object.keys(lobbyInfo).length != 0) {
-                console.log(Object.keys(lobbyInfo).length, 'Object.keys(lobbyInfo).length')
-                console.log(lobbyInfo, 'on est dans le if mais pk')
-                console.log(lobbyInfo[0].nbMax, 'lobbyInfo.nbMax before result2')
-                let result2 = getNumberOfPlayer(lobbyInfo[0].nbMax) // faudra mettre le json du emit slot
-                console.log(result2, "result2")
-                console.log(typeof (result2), "typeof2")
-                console.log('mon vier')
-                setPlayerInLobby(result2)
-                console.log(playerInLobby, 'playerInLobby after fetchData')
-                console.log(playerInLobby)
-
-                console.log(playerInLobby)
-            }
-        }
-        if (playerInLobby.length > 0) {
-            console.log(lobbyInfo, 'in return')
-            console.log(playerInLobby, 'playerInLobby  return ')
-
-            return () => arePlayerSet = false;
-        }
-
-    }, [lobbyInfo])
 
     useFocusEffect( // componentDidUpdate?
         React.useCallback(() => {
@@ -202,17 +145,19 @@ const LobbyScreen = (navigation) => {
 
             console.log('in App useEffect')
             console.log(socket)
+            console.log(currentUser)
             if (socket != null) {
                 // if (socket.connected == false)
                 // socket.connect()
 
-                socket.on("lobby_slots", data => {
-                    if (isSocketSubscribed) {
+                socket.on("FromAPI", data => {
+                    // if (isSocketSubscribed) {
 
-                        console.log(data, 'lobby_slots')
-
-                    }
+                    console.log(data, 'FromAPI')
+                    console.log("lobby")
+                    // }
                 });
+
             }
             if (socket != null) {
                 // console.log('disconnect')
@@ -225,30 +170,110 @@ const LobbyScreen = (navigation) => {
             }
         }, [socket]))
 
+    useEffect(() => {
+        let bool = true
+        socket.on('lobby_slots_init', result => {
+            if (bool) { // marche pas ça render deux fois quand meme
+
+                console.log('helpppp1')
+                console.log(result, "lobby_slots_init")
+                setPlayerInLobby(result)
+                let resultReturn = initPlayerInSlot(result)
+                console.log(' resultReturn ', resultReturn)
+            }
+
+
+        })
+        return () => {
+            // socket.disconnect();
+            // setSocket(null)
+            bool = false;
+
+        }
+    }, [])
+
+    // useEffect(() => {
+    //     socket.on('lobby_slots_init', result => {
+    //         console.log('helpppp2', socket)
+    //         console.log(result, "lobby_slots_init")
+    //         setPlayerInLobby(result)
+
+    //     })
+    // }, [])
 
 
 
-    const joinTeam = (i) => {
+    // useEffect(() => {
+    //     let arePlayerSet = true;
+    //     socket.on('lobby_slots_init', result => {
+    //         console.log('helpppp', socket)
+    //         if (arePlayerSet) {
+    //             console.log(result, "lobby_slots_init")
+    //             setPlayerInLobby(result)
+    //         }
+    //     })
+
+    //     if (playerInLobby.length > 0) {
+
+    //         return () => arePlayerSet = false;
+    //     }
+
+    // }, [lobbyInfo])
+
+    // useFocusEffect( // componentDidUpdate?
+    //     React.useCallback(() => {
+    //         let isSocketSubscribed = true;
+    //         setSocket(socketIo)
+
+    //         console.log('in App useEffect')
+    //         console.log(socket)
+    //         if (socket != null) {
+    //             // if (socket.connected == false)
+    //             // socket.connect()
+
+    //             // socket.on("gimme_lobby_slots", data => {
+    //             // if (isSocketSubscribed) {
+
+    //             //     console.log(data, 'lobby_slots')
+
+    //             // }
+    //             // });
+    //         }
+    //         if (socket != null) {
+    //             // console.log('disconnect')
+    //             return () => {
+    //                 // socket.disconnect();
+    //                 // setSocket(null)
+    //                 isSocketSubscribed = false;
+
+    //             }
+    //         }
+    //     }, [socket]))
+
+
+
+
+    const joinTeam = (slotTarget) => {
 
         let tempTab = playerInLobby
-
+        let user = navigation.route.params.currentUser
         console.log(playerInLobby, 'playerInLobby')
-        console.log(currentUser, 'currentUser')
+        console.log(user, 'user')
 
         console.log(tempTab, ' : tempTab')
         console.log(tempTab[0], 'tempTab[0]')
-        console.log('iiiiiiiii', i, 'iiiiiiiiii')
+        console.log('iiiiiiiii', slotTarget, 'iiiiiiiiii')
 
         for (let i = 0; i <= (tempTab.length - 1); i++) {
-
-            if (tempTab[i].hasOwnProperty('id') && currentUser[0].hasOwnProperty('id')) {
+            console.log(i, 'kkkll???')
+            if (tempTab[i].hasOwnProperty('id')) {
                 console.log('both have properties')
-                console.log(tempTab[i].id, currentUser[0].id)
-                console.log(tempTab[i].id == currentUser[0].id)
-                if (tempTab[i].id == currentUser[0].id) {
-
-                    console.log(tempTab[i], '????', currentUser[0], "égalité vérifiée")
+                console.log(tempTab[i].id, user.id)
+                console.log(tempTab[i].id == user.id)
+                if (tempTab[i].id == user.id) {
+                    console.log(tempTab[i].id, '????', user.id, "égalité vérifiée")
                     tempTab[i] = {}
+                    console.log(tempTab, 'apres légalité')
                 }
             }
         }
@@ -256,11 +281,80 @@ const LobbyScreen = (navigation) => {
         //     console.log(element, ' heuuu ', currentUser[0], 'ici')
         // }
         console.log(tempTab, "after trie duplicata")
-        tempTab[i] = currentUser[0]
-        console.log(tempTab[i], ' : tempTab[i]')
-        setPlayerInLobby(tempTab)
+        if (!tempTab[slotTarget].hasOwnProperty("id")) {
+            tempTab[slotTarget] = user
+            setPlayerInLobby(tempTab)
+            console.log('changement de team')
+            socket.emit('lobby_slot_update', tempTab)
+        }
+        else {
+            console.log('slot déjà occupé')
+        }
+        console.log(tempTab[slotTarget], ' : tempTab[slotTarget]')
         console.log(tempTab, ' final')
     }
+    const initPlayerInSlot = (playerInLobby) => {
+        let tempTab = playerInLobby
+        let user = navigation.route.params.currentUser
+
+        console.log(currentUser, 'currentUser')
+
+        console.log(tempTab[0], 'tempTab[0]')
+        console.log(tempTab[1], 'tempTab[1]')
+        console.log('iiiiiiiii', tempTab, 'iiiiiiiiii')
+
+        const selfSlotFilter = (tempTab, user) => {
+            for (let i = 0; i <= (tempTab.length - 1); i++) {
+
+                if (tempTab[i].id == navigation.route.params.currentUser.id) { // si currentUSer est set
+                    console.log("both have same property", tempTab[i].id, navigation.route.params.currentUser.id);
+                    console.log("both have", tempTab[i], tempTab[i].id)
+                    console.log("tempTab[i].hasOwnProperty('id')", tempTab[i].hasOwnProperty('id'))
+                    return false
+
+                }
+            }
+            return true
+        }
+        const otherUserSlotFilter = (tempTab, user) => {
+            for (let i = 0; i <= (tempTab.length - 1); i++) {
+
+                if (!tempTab[i].hasOwnProperty('id')) {
+                    console.log("both have different property", tempTab[i]);
+                    console.log("navigation.route.params.currentUser.id", navigation.route.params.currentUser.id)
+
+                    console.log("tempTab[i].hasOwnProperty('id')", tempTab[i].hasOwnProperty('id'))
+                    console.log(tempTab[i], i, ':)')
+                    console.log(tempTab, ':(')
+                    tempTab[i] = navigation.route.params.currentUser;
+                    socket.emit('lobby_slot_update', tempTab)
+                    setPlayerInLobby(tempTab)
+                    console.log(tempTab, "after init")
+
+                    return '200'
+                }
+                else {
+                    console.log("403 : slot déjà initialisé pour un autre joueur")
+                }
+            }
+        }
+
+        let result1 = selfSlotFilter(tempTab, user)
+        if (result1) {
+            let result2 = otherUserSlotFilter(tempTab, user)
+            return result2
+        }
+        else {
+            return "403 : slot déjà initialisé à votre nom"
+        }
+
+    }
+
+    // else {
+    //     console.log(element, ' heuuu ', currentUser[0], 'ici')
+    // }
+
+
 
     return (
         <><>
@@ -283,7 +377,7 @@ const LobbyScreen = (navigation) => {
                     {/* {(lobbyInfo.length > 0) && console.log(" test okeyyy ", lobbyInfo)} */}
                     {/* {(lobbyInfo.length > 0) && console.log(" test coucou ", lobbyInfo.id)} */}
 
-                    {(Object.keys(lobbyInfo).length != 0) &&
+                    {(Object.keys(lobbyInfo).length != 0 && lobbyInfo[0] != undefined) &&
                         <View>
                             {console.log(Object.keys(lobbyInfo).length, 'TARRRRAAAACEEEEE')}
                             {console.log(lobbyInfo)}
@@ -329,11 +423,11 @@ const LobbyScreen = (navigation) => {
                             }
                         })
                     } */}
-                    {(Object.keys(lobbyInfo).length != 0) &&
+                    {(Object.keys(lobbyInfo).length != 0 && lobbyInfo[0] != undefined && playerInLobby.length > 0) &&
                         <View>
                             {console.log(playerInLobby, 'playerInLobby cccoco')}
                             <AllPlayerSlot setPlayerInLobby={setPlayerInLobby} joinTeam={joinTeam}
-                                playerInLobby={playerInLobby} currentUser={currentUser} lobbyInfo={lobbyInfo[0]}></AllPlayerSlot>
+                                playerInLobby={playerInLobby} currentUser={currentUser} lobbyInfo={lobbyInfo[0]} ></AllPlayerSlot>
                         </View>
                     }
 
