@@ -402,7 +402,7 @@ const LobbyScreen = (navigation) => {
 
                         </View>
 
-                        {/* <View style={styles.popUpLobbyPart2}>
+                        {/* <View style={styles.popUpLobbyPart2}> // crash complet sur mobile
                             <View>
                                 <Image style={styles.ImageLobby}
                                 // source={require('./assets/favicon.png')} JE N'ARRIVE TOUJOURS PAS A METTRE DES IMAGES HEEEEEEEEEEELP #SHUN
