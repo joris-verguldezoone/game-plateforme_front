@@ -24,36 +24,149 @@ const Stack = createNativeStackNavigator();
 export default function App() {
 
   return (
-    <>
-      <NavigationContainer>
-        <Stack.Navigator screenOptions={{
+    <NavigationContainer>
+      <Stack.Navigator>
+        {/* props contient déjà la navigation */}
+        <Stack.Screen name="HomeScreen" component={HomeScreen} options={{
+          title: 'Accueil',
           headerStyle: {
-            backgroundColor: '#0458af',
-            borderBottomWidth: 0,
-            padding: 0,
-            shadowColor: "#0458af",
-            shadowOpacity: 100,
-            shadowRadius: 20,
-            shadowOffset: {
-              height: 0,
-              width: 0,
-            }
+            backgroundColor: '#3F403F',
           },
-          headerTintColor: 'white',
+          headerTintColor: '#fff',
           headerTitleStyle: {
             fontWeight: 'bold',
+
           },
-        }}>
-          <Stack.Screen name="HomeScreen" component={HomeScreen} options={{ title: "Accueil" }} />
-          <Stack.Screen name="RegisterScreen" component={RegisterScreen} options={{ title: 'Register' }} />
-          <Stack.Screen name="LoginScreen" component={LoginScreen} options={{ title: 'Connexion' }} />
-          <Stack.Screen name="LobbyScreen" component={LobbyScreen} options={({ route, navigation }) => ({ title: 'Lobby', orientation: 'landscape', animation: 'flip' })} />
-          <Stack.Screen name="ProfilScreen" component={ProfilScreen} options={{ title: 'Profil' }} />
-          <Stack.Screen name="CreateLobbyScreen" component={CreateLobbyScreen} options={{ title: 'CreateLobby' }} />
-          <Stack.Screen name="LobbyList" component={LobbyList} options={{ title: 'LobbyList' }} />
-        </Stack.Navigator>
-      </NavigationContainer >
-    </>
+        }} />
+        {/* {(props) => <HomeScreen {...props} />} */}
+
+        <Stack.Screen name="RegisterScreen" component={RegisterScreen} options={{
+          title: 'Inscription',
+          headerStyle: {
+            backgroundColor: '#3F403F',
+          },
+          headerTintColor: '#fff',
+          headerTitleStyle: {
+            fontWeight: 'bold',
+
+          },
+        }} />
+        <Stack.Screen name="LoginScreen" component={LoginScreen} options={{
+          title: 'Connexion',
+          headerStyle: {
+            backgroundColor: '#3F403F',
+          },
+          headerTintColor: '#fff',
+          headerTitleStyle: {
+            fontWeight: 'bold',
+
+          },
+        }} />
+        {/* {(props) => <LoginScreen accessToken={accessToken} currentUser={currentUser} />} */}
+        {/* </Stack.Screen> */}
+
+        <Stack.Screen name="LobbyScreen" component={LobbyScreen} options={{
+          title: 'Lobby',
+          headerStyle: {
+            backgroundColor: '#3F403F',
+          },
+          headerTintColor: '#fff',
+          headerTitleStyle: {
+            fontWeight: 'bold',
+
+          }, animation: 'flip'
+        }} />
+
+        <Stack.Screen name="LobbyList" component={LobbyList} options={{
+          title: 'LobbyList',
+          headerStyle: {
+            backgroundColor: '#3F403F',
+          },
+          headerTintColor: '#fff',
+          headerTitleStyle: {
+            fontWeight: 'bold',
+
+          }, animation: 'flip'
+        }} />
+
+
+        {/* On navigue ves le stackScreen et son name */}
+        <Stack.Screen name="ProfilScreen" component={ProfilScreen} options={{
+          title: 'Profil',
+          headerStyle: {
+            backgroundColor: '#3F403F',
+          },
+          headerTintColor: '#fff',
+          headerTitleStyle: {
+            fontWeight: 'bold',
+
+          }
+        }} />
+        <Stack.Screen name="CreateLobbyScreen" component={CreateLobbyScreen} options={{
+          title: 'CreateLobby',
+          headerStyle: {
+            backgroundColor: '#3F403F',
+          },
+          headerTintColor: '#fff',
+          headerTitleStyle: {
+            fontWeight: 'bold',
+
+          }
+        }} />
+        {/* <Stack.Screen name="Menu" component={MainScreen} options={{ title: 'Menu' }} /> */}
+        {/* <Stack.Screen name="InfoJeu" component={GameInfoScreen} options={{ title: 'Info Jeu' }} /> */}
+
+      </Stack.Navigator>
+      {/* <View>
+        <TextInput
+          placeholder="try something useless :)"
+          // autoComplete="password"
+          name="password"
+        // value={user.password}
+
+        />
+        <Button
+          title="send socket Event"
+          accessibilityLabel="Appuyez sur ce bouton pour vous connecter"
+          // onPress={() => {
+          //   handleSubmit,
+          //     navigation.navigate('ProfilScreen');
+          // }}
+          onPress={handleSubmit}
+        // sur le onpress je change les props
+        //ref={(c) => {
+        //setLogChange(1);
+        //}}
+        />
+        <Button
+          title="Blue"
+          accessibilityLabel="Appuyez sur ce bouton pour vous connecter"
+          // onPress={() => {
+          //   handleSubmit,
+          //     navigation.navigate('ProfilScreen');
+          // }}
+          onPress={blue}
+        // sur le onpress je change les props
+        //ref={(c) => {
+        //setLogChange(1);
+        //}}
+        />
+        <Button
+          title="red"
+          accessibilityLabel="Appuyez sur ce bouton pour vous connecter"
+          // onPress={() => {
+          //   handleSubmit,
+          //     navigation.navigate('ProfilScreen');
+          // }}
+          onPress={red}
+        // sur le onpress je change les props
+        //ref={(c) => {
+        //setLogChange(1);
+        //}}
+        />
+
+      </View> */}
+    </NavigationContainer >
   );
 }
 {/* props contient déjà la navigation */ }

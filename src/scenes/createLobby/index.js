@@ -89,9 +89,9 @@ const CreateLobbyScreen = (navigation, props,) => {
         <>
             {/* <ClientComponent>
             </ClientComponent> */}
-
-            <View style={{ flex: 1, flexDirection: 'column', alignContent: 'center', justifyContent: 'center', width: '75%' }}>
-                <View style={styles.container}>
+            <View style={styles.mainView}>
+                <View style={styles.topView}>
+                    <Text style={{ color: "black", fontSize: 28 }}>Selectionnez un jeu:</Text>
                     <Picker
                         selectedValue={selectedValue}
                         style={{ height: 50, width: 150 }}
@@ -104,11 +104,17 @@ const CreateLobbyScreen = (navigation, props,) => {
 
                 </View>
 
-                <View>
-                    <GameRuleComponent socket={navigation.route.params.socket} currentUser={navigation.route.params.currentUser} selectedValue={selectedValue} navigation={navigation} />
+                <View style={styles.middleView}>
+                    <View style={styles.popUpView}>
+                        <GameRuleComponent socket={navigation.route.params.socket} currentUser={navigation.route.params.currentUser} selectedValue={selectedValue} navigation={navigation} />
+                        <View style={styles.bottomView}>
+
+                        </View>
+                    </View>
                 </View>
             </View>
         </>
+
     );
 }
 

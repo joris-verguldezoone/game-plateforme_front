@@ -16,39 +16,80 @@ const RegisterScreen = () => {
     const [formRef, setFormRef] = useState();
 
     return (
-        <Form className="auth-form" onSubmit={handleLogin} ref={(c) => { setFormRef(c); }}>
-            <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-                <Text style={styles}>Inscription</Text>
-                <TextInput
-                    style={styles.inputRegisterLogin}
-                    placeholder="Username"
-                    autoComplete="MyName"
-                    onChange={e => setUsername(e.target.value)}
-                />
-                <TextInput
-                    style={styles.inputRegisterLogin}
-                    placeholder="Mot de passe"
-                    autoComplete="password"
-                    onChange={e => setPassword(e.target.value)}
-                />
-                <TextInput
-                    style={styles.inputRegisterLogin}
-                    placeholder="Conf. Mot de passe"
-                    autoComplete="password"
-                    onChange={e => setConfpassword(e.target.value)}
-                />
-                <Button
-                    style={styles.buttonRegisterLogin}
-                    title="S'inscrire"
-                    accessibilityLabel="Appuyez sur ce bouton pour vous inscrire"
-                    onPress={() => Register(username, password, confPassword)}
-                />
+
+        <View style={styles.mainView}>
+            <View style={styles.topView}>
+                <View style={styles.divRound}>
+                    <Image
+                        style={styles.imageLogo}
+                        source={require('./logo.png')}
+                    />
+                </View>
             </View>
-        </Form>
+            <View style={styles.middleView}>
+                <Text style={styles.textTitle}>Inscription</Text>
+                <View style={styles.popUpView}>
+                    <View>
+                        <Text style={styles.popUpTextError}></Text>
+
+                        <Text style={styles.popUpText}>Pseudo</Text>
+                        <TextInput style={styles.popUpTextInput}></TextInput>
+
+                        <Text style={styles.popUpText}>Mot de passe</Text>
+                        <TextInput style={styles.popUpTextInput}></TextInput>
+
+                        <Text style={styles.popUpText}>Confirm. Mot de passe</Text>
+                        <TextInput style={styles.popUpTextInput}></TextInput>
+
+
+                        <Text style={styles.popUpTextError}></Text>
+
+                        <View style={{ flex: 3 }}>
+                            <Button
+                                title="S'inscrire"
+                                color="#6CA054"
+                            />
+                        </View>
+                    </View>
+                </View>
+            </View>
+            <View style={styles.bottomView}>
+                <View>
+                    <Text></Text>
+                </View>
+            </View>
+        </View>
+        // <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+        //     <Text style={styles}>Inscription</Text>
+        //     <TextInput
+        //         style={styles.inputRegisterLogin}
+        //         placeholder="Username"
+        //         autoComplete="MyName"
+        //         onChange={e => setUsername(e.target.value)}
+        //     />
+        //     <TextInput
+        //         style={styles.inputRegisterLogin}
+        //         placeholder="Mot de passe"
+        //         autoComplete="password"
+        //         onChange={e => setPassword(e.target.value)}
+        //     />
+        //     <TextInput
+        //         style={styles.inputRegisterLogin}
+        //         placeholder="Conf. Mot de passe"
+        //         autoComplete="password"
+        //         onChange={e => setConfpassword(e.target.value)}
+        //     />
+        //     <Button
+        //         style={styles.buttonRegisterLogin}
+        //         title="S'inscrire"
+        //         accessibilityLabel="Appuyez sur ce bouton pour vous inscrire"
+        //         onPress={() => Register(username, password, confPassword)}
+        //     />
+        // </View>
     );
 };
 
-export { RegisterScreen }
+// export { RegisterScreen }
 
 const Register = (username, password, confPassword) => { // refacto dans les services
     // set state ici qui sera récupéré apres la requete axios 

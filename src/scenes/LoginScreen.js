@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { StyleSheet, Text, View, Button, TextInput, ScrollView, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, View, Button, TextInput, ScrollView, Image, TouchableOpacity } from 'react-native';
 import styles from './styles.js';
 // import { useForm } from "react-hook-form";
 import * as SecureStore from 'expo-secure-store';
