@@ -15,6 +15,7 @@ import RadioButton from '../../component/molecules/radioButtons.js'
 // y'aurait plus qu'a render un nouveau component LobbyContent qui posséderait des props et serait indépendant au niveau du render de celui-ci
 // séparer les composant qui fetch avec ceux qui render 
 
+
 const GameRuleComponent = (props) => {
     const [gameRule, setGameRule] = useState({});
     const [difficulte, setDifficulte] = useState(0);
@@ -66,8 +67,8 @@ const GameRuleComponent = (props) => {
         console.log('tarace2', tarace)
         console.log('tarace3', response)
         console.log('radioConstruct', radioConstruct)
-        setRadioGameRule(radioConstruct);
-        setGameRule(response);
+
+        return [radioConstruct, response];
 
 
     }
@@ -84,8 +85,9 @@ const GameRuleComponent = (props) => {
             if (stop)
                 getOneGameRule(props.selectedValue).then(response => {
                     console.log(response, 'gamerule response')
-                    constructRadioButton(response)
-
+                    let result = constructRadioButton(response)
+                    setRadioGameRule(result[0]);
+                    setGameRule(result[1]);
                 })
 
         }
@@ -172,11 +174,13 @@ const GameRuleComponent = (props) => {
                         // value={user.password}
                         onChangeText={e => setNomLobby(e)}
                     />
-                    <Button
-                        title="Créer le lobby"
-                        accessibilityLabel="Appuyez sur ce bouton pour créer un lobby"
-                        onPress={submitLobby}
-                    />
+                    {regle != undefined &&
+                        <Button
+                            title="Créer le lobby"
+                            accessibilityLabel="Appuyez sur ce bouton pour créer un lobby"
+                            onPress={submitLobby}
+                        />
+                    }
                 </ScrollView>
             </View>
         );

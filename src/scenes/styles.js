@@ -51,7 +51,7 @@ const styles = StyleSheet.create({
     // },
 
     popUpView: {
-        backgroundColor: '#3F403F', alignItems: 'center', justifyContent: 'center', borderColor: '#AAAAAA', borderWidth: 1, borderRadius: 5, padding: 20, shadowRadius: 10, shadowOffset: { width: 0, height: 5 }, shadowColor: '#AAAAAA',
+        backgroundColor: '#3F403F', borderColor: '#AAAAAA', borderWidth: 1, borderRadius: 5, padding: 10, shadowRadius: 10, shadowOffset: { width: 0, height: 5 }, shadowColor: '#AAAAAA',
     },
 
     popUpTextError: {
